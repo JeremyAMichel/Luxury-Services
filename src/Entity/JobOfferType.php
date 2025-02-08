@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\JobOfferTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: JobOfferTypeRepository::class)]
 class JobOfferType
@@ -14,6 +15,8 @@ class JobOfferType
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $name = null;
 
     public function getId(): ?int
