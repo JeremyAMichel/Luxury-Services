@@ -21,6 +21,8 @@ final class ProfileController extends AbstractController
             return $this->render('errors/not-verified.html.twig');
         }
 
+        $candidate = $user->getCandidate();
+
         return $this->render('profile/index.html.twig', [
             
         

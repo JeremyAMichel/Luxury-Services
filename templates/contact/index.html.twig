@@ -1,25 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block styleCustom %}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+	<style>
+        .form-error {
+            color: red;
+            font-size: 0.875em; /* Ajustez cette valeur selon vos besoins */
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var map = L.map('myMap').setView([45.4382157, 4.3805858], 13);
+	{{ parent() }}
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+var map = L.map('myMap').setView([
+45.4382157, 4.3805858
+], 13);
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 
-            L.marker([45.4382157, 4.3805858]).addTo(map)
-                .bindPopup('Luxury Services')
-                .openPopup();
-        });
-    </script>
+L.marker([45.4382157, 4.3805858]).addTo(map).bindPopup('Luxury Services').openPopup();
+});
+	</script>
 {% endblock %}
 
 {% block body %}
@@ -43,9 +47,15 @@
 	</section>
 
 	<!-- Page Content-->
-	<form method="POST" action="#!" accept-charset="UTF-8" id="formContact" class="light-gray-bg">
-		<input name="_token" type="hidden" value="">
-		<input name="job_id" type="hidden" value="">
+	{# <form method="POST" action="#!" accept-charset="UTF-8" id="formContact" class="light-gray-bg"> #}
+		{{ form_start(form, {
+			'attr': {
+				'id': 'formContact', 
+				'class': 'light-gray-bg', 
+				'accept-charset': 'UTF-8'
+			}
+		}) }}
+		{# <input name="job_id" type="hidden" value=""> #}
 		<section class="section-padding">
 			<div class="container">
 				<div class="text-center mb-80">
@@ -58,36 +68,61 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="input-field">
-									<input required="required" name="firstname" type="text">
-									<label for="firstname">First name</label>
+									{{ form_widget(form.firstName) }}
+									{{ form_label(form.firstName) }}
+									{{ form_errors(form.firstName, {
+										'attr': {
+											'class': 'form-error'
+										}
+									}) }}
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="input-field">
-									<input required="required" name="lastname" type="text">
-									<label for="lastname">Last name</label>
+									{{ form_widget(form.lastName) }}
+									{{ form_label(form.lastName) }}
+									{{ form_errors(form.lastName, {
+										'attr': {
+											'class': 'form-error'
+										}
+									}) }}
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="input-field">
-									<input required="required" name="email" type="email">
-									<label for="email">Email</label>
+									{{ form_widget(form.email) }}
+									{{ form_label(form.email) }}
+									{{ form_errors(form.email, {
+										'attr': {
+											'class': 'form-error'
+										}
+									}) }}
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="input-field">
-									<input required="required" name="phone" type="tel">
-									<label for="phone">Phone Number</label>
+									{{ form_widget(form.phone) }}
+									{{ form_label(form.phone) }}
+									{{ form_errors(form.phone, {
+										'attr': {
+											'class': 'form-error'
+										}
+									}) }}
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="input-field">
-									<textarea class="materialize-textarea" required="required" name="message" cols="50" rows="10"></textarea>
-									<label for="message">Message</label>
+									{{ form_widget(form.message) }}
+									{{ form_label(form.message) }}
+									{{ form_errors(form.message, {
+										'attr': {
+											'class': 'form-error'
+										}
+									}) }}
 								</div>
 							</div>
 						</div>
@@ -99,6 +134,7 @@
 							</div>
 						</div>
 					</div>
+
 
 					<div class="col-xs-12 col-sm-12 col-md-4 contact-info mt-40">
 
@@ -126,7 +162,7 @@
 				</div>
 			</div>
 		</section>
-	</form>
-	<div id="myMap"></div>
+		{{ form_end(form) }}
+		<div id="myMap"></div>
 
-{% endblock %}
+	{% endblock %}
