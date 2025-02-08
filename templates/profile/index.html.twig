@@ -97,16 +97,18 @@
 				{# Current location #}
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="input-field">
-						<input id="current_location" name="current_location" type="text" value="">
-						<label for="current_location">Current location</label>
+						{{ form_widget(form.currentLocation) }}
+						{{ form_label(form.currentLocation) }}
+						{{ form_errors(form.currentLocation) }}
 					</div>
 				</div>
 
 				{# Address #}
 				<div class="col-xs-12 col-sm-8">
 					<div class="input-field">
-						<input id="address" name="address" type="text" value="">
-						<label for="address">Address</label>
+						{{ form_widget(form.address) }}
+						{{ form_label(form.address) }}
+						{{ form_errors(form.address) }}
 					</div>
 				</div>
 			</div>
@@ -141,16 +143,18 @@
 						{# Country #}
 						<div class="col-xs-12 col-sm-6">
 							<div class="input-field">
-								<input id="country" name="country" type="text" value="">
-								<label for="country">Country</label>
+								{{ form_widget(form.country) }}
+								{{ form_label(form.country) }}
+								{{ form_errors(form.country) }}
 							</div>
 						</div>
 
 						{# Nationality #}
 						<div class="col-xs-12 col-sm-6">
 							<div class="input-field">
-								<input id="nationality" name="nationality" type="text" value="">
-								<label for="nationality">Nationality</label>
+								{{ form_widget(form.nationality) }}
+								{{ form_label(form.nationality) }}
+								{{ form_errors(form.nationality) }}
 							</div>
 						</div>
 

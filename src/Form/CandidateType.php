@@ -46,6 +46,34 @@ class CandidateType extends AbstractType
                     'class' => 'active',
                 ],
             ])
+            ->add('currentLocation', TextType::class, [
+                'required' => false,
+                'label' => 'Current location',
+                'attr' => [
+                    'id' => 'current_location',
+                ],
+            ])
+            ->add('address', TextType::class, [
+                'required' => false,
+                'label' => 'Address',
+                'attr' => [
+                    'id' => 'address',
+                ],
+            ])
+            ->add('country', TextType::class, [
+                'required' => false,
+                'label' => 'Country',
+                'attr' => [
+                    'id' => 'country',
+                ],
+            ])
+            ->add('nationality', TextType::class, [
+                'required' => false,
+                'label' => 'Nationality',
+                'attr' => [
+                    'id' => 'nationality',
+                ],
+            ])
             ->addEventListener(FormEvents::POST_SUBMIT, $this->setUpdatedAt(...))
         ;
     }
