@@ -37,7 +37,7 @@
 					<h4>
 						<img src="{{ asset('img/s9bPVaK.gif') }}" style="height: 80px; width: 201px;">
 						&nbsp;
-						                            &nbsp; Hooray ! Your profile is complete.
+												                            &nbsp; Hooray ! Your profile is complete.
 					</h4>
 					<div class="c100 p100 small complete ">
 						<span>100%</span>
@@ -60,263 +60,263 @@
 			'enctype': 'multipart/form-data'
 		}
 	}) }}
-		<section class="section-padding">
-			<div class="container">
-				<div class="row">
-					<h3 class="text-extrabold">Your personal informations</h3>
+	<section class="section-padding">
+		<div class="container">
+			<div class="row">
+				<h3 class="text-extrabold">Your personal informations</h3>
 
-					{# Gender #}
-					<div class="col-xs-12 col-sm-6 col-md-4">
-						<div class="input-field">
-							<select id="gender" name="gender">
-								<option value="" selected="selected">Choose an option...</option>
-								<option value="male">Male</option>
-								<option value="female">Female</option>
-								<option value="transgender">Transgender</option>
-							</select>
-							<label for="gender" class="active">Gender</label>
-						</div>
+				{# Gender #}
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="input-field">
+						{{ form_widget(form.gender) }}
+						{{ form_label(form.gender) }}
+						{{ form_errors(form.gender) }}
 					</div>
+				</div>
 
-					<div class="clearfix visible-sm"></div>
+				<div class="clearfix visible-sm"></div>
 
-					{# Firstname #}
-					<div class="col-xs-12 col-sm-6 col-md-4">
-						<div class="input-field">							
-							{{ form_widget(form.firstName) }}
-							{{ form_label(form.firstName) }}
-							{{ form_errors(form.firstName) }}
-						</div>
+				{# Firstname #}
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="input-field">
+						{{ form_widget(form.firstName) }}
+						{{ form_label(form.firstName) }}
+						{{ form_errors(form.firstName) }}
 					</div>
+				</div>
 
-					{# LastName #}
-					<div class="col-xs-12 col-sm-6 col-md-4">
-						<div class="input-field">
-							{{ form_widget(form.lastName) }}
-							{{ form_label(form.lastName) }}
-							{{ form_errors(form.lastName) }}
-						</div>
+				{# LastName #}
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="input-field">
+						{{ form_widget(form.lastName) }}
+						{{ form_label(form.lastName) }}
+						{{ form_errors(form.lastName) }}
 					</div>
+				</div>
 
-					{# Current location #}
-					<div class="col-xs-12 col-sm-6 col-md-4">
-						<div class="input-field">
-							<input id="current_location" name="current_location" type="text" value="">
-							<label for="current_location">Current location</label>
-						</div>
+				{# Current location #}
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="input-field">
+						<input id="current_location" name="current_location" type="text" value="">
+						<label for="current_location">Current location</label>
 					</div>
+				</div>
 
-					{# Address #}
-					<div class="col-xs-12 col-sm-8">
-						<div class="input-field">
-							<input id="address" name="address" type="text" value="">
-							<label for="address">Address</label>
+				{# Address #}
+				<div class="col-xs-12 col-sm-8">
+					<div class="input-field">
+						<input id="address" name="address" type="text" value="">
+						<label for="address">Address</label>
+					</div>
+				</div>
+			</div>
+			<div
+				class="row">
+
+				{# Profil Pic #}
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="file-field input-field" style="margin-top: 32px;">
+						<div class="btn btn-lg primary waves-effect waves-light">
+							<span>
+								<i class="material-icons">insert_photo</i>
+								Photo</span>
+							<input id="photo" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="photo" type="file">
+						</div>
+
+						<div class="existing-file">
+							<a href="#!" target="_blank">
+								<i class="material-icons">&#xE24D;</i>
+								profil_picture.jpg</a>
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
 						</div>
 					</div>
 				</div>
-				<div class="row">
 
-					{# Profil Pic #}
-					<div class="col-xs-12 col-sm-6 col-md-4">
-						<div class="file-field input-field" style="margin-top: 32px;">
+				<div class="col-xs-12 col-sm-6 col-md-8">
+					<div
+						class="row">
+
+						{# Country #}
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-field">
+								<input id="country" name="country" type="text" value="">
+								<label for="country">Country</label>
+							</div>
+						</div>
+
+						{# Nationality #}
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-field">
+								<input id="nationality" name="nationality" type="text" value="">
+								<label for="nationality">Nationality</label>
+							</div>
+						</div>
+
+						{# Birthdate #}
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-field">
+								<input class="datepicker" id="birth_date" name="birth_date" type="text" value="">
+								<label for="birth_date">Birthdate</label>
+							</div>
+						</div>
+
+						{# Birthplace #}
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-field">
+								<input id="birth_place" name="birth_place" type="text" value="">
+								<label for="birth_place">Birthplace</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-40">
+				<h3 class="text-extrabold">Your professional profile</h3>
+				<div class="col-xs-12 col-sm-6">
+
+					<div
+						class="card card-panel passport">
+
+						{# Passport #}
+						<div class="file-field input-field">
 							<div class="btn btn-lg primary waves-effect waves-light">
 								<span>
-									<i class="material-icons">insert_photo</i>
-									Photo</span>
-								<input id="photo" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="photo" type="file">
+									<i class="material-icons">&#xE24D;</i>
+									Passport</span>
+								<input id="passport" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="passport" type="file">
+							</div>
+							<div class="existing-file">
+								<a href="#!" target="_blank">
+									<i class="material-icons">&#xE24D;</i>
+									passeport.jpg</a>
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text" placeholder="Upload your passport" readonly>
+							</div>
+						</div>
+
+						{# CV #}
+						<div class="file-field input-field">
+							<div class="btn btn-lg primary waves-effect waves-light">
+								<span>
+									<i class="material-icons">&#xE24D;</i>
+									CV</span>
+								<input id="cv" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="cv" type="file">
 							</div>
 
 							<div class="existing-file">
 								<a href="#!" target="_blank">
 									<i class="material-icons">&#xE24D;</i>
-									profil_picture.jpg</a>
+									CV.pdf</a>
 							</div>
 							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
+								<input class="file-path validate" type="text" placeholder="Upload your Curriculum Vitae" readonly>
 							</div>
 						</div>
-					</div>
 
-					<div class="col-xs-12 col-sm-6 col-md-8">
-						<div class="row">
-
-							{# Country #}
-							<div class="col-xs-12 col-sm-6">
-								<div class="input-field">
-									<input id="country" name="country" type="text" value="">
-									<label for="country">Country</label>
-								</div>
-							</div>
-
-							{# Nationality #}
-							<div class="col-xs-12 col-sm-6">
-								<div class="input-field">
-									<input id="nationality" name="nationality" type="text" value="">
-									<label for="nationality">Nationality</label>
-								</div>
-							</div>
-
-							{# Birthdate #}
-							<div class="col-xs-12 col-sm-6">
-								<div class="input-field">
-									<input class="datepicker" id="birth_date" name="birth_date" type="text" value="">
-									<label for="birth_date">Birthdate</label>
-								</div>
-							</div>
-							
-							{# Birthplace #}
-							<div class="col-xs-12 col-sm-6">
-								<div class="input-field">
-									<input id="birth_place" name="birth_place" type="text" value="">
-									<label for="birth_place">Birthplace</label>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
-				<div class="row mt-40">
-					<h3 class="text-extrabold">Your professional profile</h3>
-					<div class="col-xs-12 col-sm-6">
 
-						<div class="card card-panel passport">
+				<div
+					class="col-xs-12 col-sm-6">
 
-							{# Passport #}
-							<div class="file-field input-field">
-								<div class="btn btn-lg primary waves-effect waves-light">
-									<span>
-										<i class="material-icons">&#xE24D;</i>
-										Passport</span>
-									<input id="passport" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="passport" type="file">
-								</div>
-								<div class="existing-file">
-									<a href="#!" target="_blank">
-										<i class="material-icons">&#xE24D;</i>
-										passeport.jpg</a>
-								</div>
-								<div class="file-path-wrapper">
-									<input class="file-path validate" type="text" placeholder="Upload your passport" readonly>
-								</div>
-							</div>
-
-							{# CV #}
-							<div class="file-field input-field">
-								<div class="btn btn-lg primary waves-effect waves-light">
-									<span>
-										<i class="material-icons">&#xE24D;</i>
-										CV</span>
-									<input id="cv" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="cv" type="file">
-								</div>
-
-								<div class="existing-file">
-									<a href="#!" target="_blank">
-										<i class="material-icons">&#xE24D;</i>
-										CV.pdf</a>
-								</div>
-								<div class="file-path-wrapper">
-									<input class="file-path validate" type="text" placeholder="Upload your Curriculum Vitae" readonly>
-								</div>
-							</div>
-
+					{# Job Category #}
+					<div class="col-xs-12 col-sm-12">
+						<div class="input-field" style="margin-top: 5px;">
+							<select id="job_sector" name="job_sector[]" multiple data-placeholder="Type in or Select job sector you would be interested in.">
+								<option value="">Choose an option...</option>
+								<option value="">job sector</option>
+							</select>
+							<label for="job_sector" class="active">Interest in job sector</label>
 						</div>
 					</div>
 
-					<div class="col-xs-12 col-sm-6">
-
-						{# Job Category #}
-						<div class="col-xs-12 col-sm-12">
-							<div class="input-field" style="margin-top: 5px;">
-								<select id="job_sector" name="job_sector[]" multiple data-placeholder="Type in or Select job sector you would be interested in.">
-									<option value="">Choose an option...</option>
-									<option value="">job sector</option>
-								</select>
-								<label for="job_sector" class="active">Interest in job sector</label>
-							</div>
-						</div>
-
-						{# Experience #}
-						<div class="col-xs-12 col-sm-12">
-							<div class="input-field">
-								<select id="experience"  name="experience">
-									<option value="">Choose</option>
-									<option value="3m">0 - 6 month</option>
-									<option value="6m">6 month - 1 year</option>
-									<option value="1y">1 - 2 years</option>
-									<option value="2y">2+ years</option>
-									<option value="5y" selected="selected">5+ years</option>
-									<option value="10y">10+ years</option>
-								</select>
-								<label for="experience" class="active">Experience</label>
-							</div>
-						</div>
-
-					</div>
-
-					{# Description #}
+					{# Experience #}
 					<div class="col-xs-12 col-sm-12">
 						<div class="input-field">
-							<textarea class="materialize-textarea" id="description" name="description" cols="50" rows="10"></textarea>
-							<label for="description">Short description for your profile, as well as more personnal informations (e.g. your hobbies/interests ). You can also paste any link you want.</label>
+							<select id="experience" name="experience">
+								<option value="">Choose</option>
+								<option value="3m">0 - 6 month</option>
+								<option value="6m">6 month - 1 year</option>
+								<option value="1y">1 - 2 years</option>
+								<option value="2y">2+ years</option>
+								<option value="5y" selected="selected">5+ years</option>
+								<option value="10y">10+ years</option>
+							</select>
+							<label for="experience" class="active">Experience</label>
 						</div>
+					</div>
+
+				</div>
+
+				{# Description #}
+				<div class="col-xs-12 col-sm-12">
+					<div class="input-field">
+						<textarea class="materialize-textarea" id="description" name="description" cols="50" rows="10"></textarea>
+						<label for="description">Short description for your profile, as well as more personnal informations (e.g. your hobbies/interests ). You can also paste any link you want.</label>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
-		<section class="section-padding gray-bg">
-			<div class="container">
-				<div class="row">
-					<h3 class="text-extrabold">Your Luxury Services account</h3>
+	<section class="section-padding gray-bg">
+		<div class="container">
+			<div class="row">
+				<h3 class="text-extrabold">Your Luxury Services account</h3>
 
-					{# Email #}
-					<div class="col-xs-12 col-sm-4">
-						<div class="input-field">
-							<input id="email" name="email" type="email" value="">
-							<label for="email">Email</label>
-						</div>
-					</div>
-
-					{# Password Change #}
-					<div class="col-xs-12 col-sm-4">
-						<div class="input-field">
-							<input id="password" name="password" type="password" value="">
-							<label for="password">Change your password here</label>
-						</div>
-					</div>
-
-					{# Confirm Password #}
-					<div class="col-xs-12 col-sm-4">
-						<div class="input-field">
-							<input id="password_repeat" name="password_repeat" type="password" value="">
-							<label for="password_repeat">Confirm your new password</label>
-						</div>
+				{# Email #}
+				<div class="col-xs-12 col-sm-4">
+					<div class="input-field">
+						<input id="email" name="email" type="email" value="">
+						<label for="email">Email</label>
 					</div>
 				</div>
 
-				{# Delete Account #}
-				<div class="row">
-					<div class="col-xs-12 mt-40 mb-80 delete-account">
-						<a href="#!" onclick="return prompt('Please Type \'Delete my account\' to delete your Luxury Services account:') == 'Delete my account'" class="btn btn-block btn-lg waves-effect waves-light">
-							<i class="material-icons">&#xE872;</i>Delete my account</a>
+				{# Password Change #}
+				<div class="col-xs-12 col-sm-4">
+					<div class="input-field">
+						<input id="password" name="password" type="password" value="">
+						<label for="password">Change your password here</label>
 					</div>
 				</div>
 
-
-				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-4">
-						<a href="{{ path('app_home') }}" class="btn btn-block btn-lg border primary waves-effect waves-light">
-							<i class="fa fa-long-arrow-left"></i>
-							Back home</a>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-4">
-						<button type="submit" class="btn btn-block btn-lg gradient secondary waves-effect waves-light">
-							<span>
-								<strong>UPDATE</strong>
-								NOW</span>
-						</button>
+				{# Confirm Password #}
+				<div class="col-xs-12 col-sm-4">
+					<div class="input-field">
+						<input id="password_repeat" name="password_repeat" type="password" value="">
+						<label for="password_repeat">Confirm your new password</label>
 					</div>
 				</div>
-
 			</div>
-		</section>
+
+			{# Delete Account #}
+			<div class="row">
+				<div class="col-xs-12 mt-40 mb-80 delete-account">
+					<a href="#!" onclick="return prompt('Please Type \'Delete my account\' to delete your Luxury Services account:') == 'Delete my account'" class="btn btn-block btn-lg waves-effect waves-light">
+						<i class="material-icons">&#xE872;</i>Delete my account</a>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<a href="{{ path('app_home') }}" class="btn btn-block btn-lg border primary waves-effect waves-light">
+						<i class="fa fa-long-arrow-left"></i>
+						Back home</a>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-4">
+					<button type="submit" class="btn btn-block btn-lg gradient secondary waves-effect waves-light">
+						<span>
+							<strong>UPDATE</strong>
+							NOW</span>
+					</button>
+				</div>
+			</div>
+
+		</div>
+	</section>
 	{{ form_end(form) }}
 {% endblock %}

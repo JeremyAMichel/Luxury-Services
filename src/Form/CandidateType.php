@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Candidate;
-use App\Entity\User;
+use App\Entity\Gender;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -31,6 +31,19 @@ class CandidateType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'id' => 'last_name',
+                ],
+            ])
+            ->add('gender', EntityType::class, [
+                'class' => Gender::class,
+                'choice_label' => 'name',
+                'required' => false,
+                'placeholder' => 'Choose an option...',
+                'label' => 'Gender',
+                'attr' => [
+                    'id' => 'gender',
+                ],
+                'label_attr' => [
+                    'class' => 'active',
                 ],
             ])
             ->addEventListener(FormEvents::POST_SUBMIT, $this->setUpdatedAt(...))
