@@ -1,6 +1,36 @@
-{% for type, messages in app.flashes %}
-    <div class="alert alert-{{ type}}">
-        {{ messages | join('. ')}}
-    </div>
+<div class="flash-container">
+    {% for type, messages in app.flashes %}
+        <div class="alert alert-{{ type }}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ messages | join('. ')}}
+        </div>
+    {% endfor %}
+</div>
 
-{% endfor %}
+<style>
+.flash-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 300px;
+}
+
+.flash-container .alert {
+    margin-bottom: 10px;
+    position: relative;
+    padding-right: 35px;
+}
+
+.flash-container .alert .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px; /* Augmenter la taille de la croix */
+    cursor: pointer;
+}
+</style>
