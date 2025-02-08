@@ -19,7 +19,7 @@
 					<span class="white-text">Personnal & Professionnal informations</span>
 					<ol class="breadcrumb">
 						<li>
-							<a href="#!">Home</a>
+							<a href="{{ path('app_home') }}">Home</a>
 						</li>
 						<li class="active">Profile</li>
 					</ol>
@@ -246,13 +246,13 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12 mt-40 mb-80 delete-account">
-						<a href="#!" onclick="return prompt('Please Type \'Delete my account\' to delete your K-Yachting Services account:') == 'Delete my account'" class="btn btn-block btn-lg waves-effect waves-light">
+						<a href="#!" onclick="return prompt('Please Type \'Delete my account\' to delete your Luxury Services account:') == 'Delete my account'" class="btn btn-block btn-lg waves-effect waves-light">
 							<i class="material-icons">&#xE872;</i>Delete my account</a>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-4">
-						<a href="#!" class="btn btn-block btn-lg border primary waves-effect waves-light">
+						<a href="{{ path('app_home') }}" class="btn btn-block btn-lg border primary waves-effect waves-light">
 							<i class="fa fa-long-arrow-left"></i>
 							Back home</a>
 					</div>
