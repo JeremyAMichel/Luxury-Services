@@ -1,0 +1,271 @@
+{% extends 'base.html.twig' %}
+
+{% block styleCustom %}
+	<style>
+		select {
+			display: block !important;
+		}
+	</style>
+{% endblock %}
+
+
+{% block body %}
+	<!-- Page Header-->
+	<section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="white-text">Your profile</h2>
+					<span class="white-text">Personnal & Professionnal informations</span>
+					<ol class="breadcrumb">
+						<li>
+							<a href="#!">Home</a>
+						</li>
+						<li class="active">Profile</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Page Content-->
+	<section class="gray-bg">
+		<div class="container">
+			<div class="row">
+				<div class="score-container">
+					<h4>
+						<img src="{{ asset('img/s9bPVaK.gif') }}" style="height: 80px; width: 201px;">
+						&nbsp;
+						                            &nbsp; Hooray ! Your profile is complete.
+					</h4>
+					<div class="c100 p100 small complete ">
+						<span>100%</span>
+						<div class="slice">
+							<div class="bar"></div>
+							<div class="fill"></div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</section>
+
+	<form method="POST" action="#!" accept-charset="UTF-8" id="candidateForm" role="form" data-parsley-validate="" enctype="multipart/form-data"><input name="_token" type="hidden" value="UYfchy67WuTVzhSstPK1RDZEIfgqpKCcLnLyhf8a">
+		<section class="section-padding">
+			<div class="container">
+				<div class="row">
+					<h3 class="text-extrabold">Your personal informations</h3>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="input-field">
+							<select id="gender" name="gender">
+								<option value="">Choose an option...</option>
+								<option value="male">Male</option>
+								<option value="female" selected="selected">Female</option>
+								<option value="transgender">Transgender</option>
+							</select>
+							<label for="gender" class="active">Gender</label>
+						</div>
+					</div>
+					<div class="clearfix visible-sm"></div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="input-field">
+							<input type="text" class="form-control" name="first_name" id="first_name" value="" required>
+							<label for="first_name">First name</label>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="input-field">
+							<input type="text" class="form-control" name="last_name" id="last_name" value="" required>
+							<label for="last_name">Last name</label>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="input-field">
+							<input required="required" id="current_location" name="current_location" type="text" value="">
+							<label for="current_location">Current location</label>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<div class="input-field">
+							<input id="address" name="address" type="text" value="">
+							<label for="address">Address</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="file-field input-field" style="margin-top: 32px;">
+							<div class="btn btn-lg primary waves-effect waves-light">
+								<span>
+									<i class="material-icons">insert_photo</i>
+									Photo</span>
+								<input id="photo" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="photo" type="file">
+							</div>
+
+							<div class="existing-file">
+								<a href="#!" target="_blank">
+									<i class="material-icons">&#xE24D;</i>
+									profil_picture.jpg</a>
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-8">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<div class="input-field">
+									<input id="country" name="country" type="text" value="">
+									<label for="country">Country</label>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="input-field">
+									<input id="nationality" name="nationality" type="text" value="">
+									<label for="nationality">Nationality</label>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="input-field">
+									<input class="datepicker" id="birth_date" name="birth_date" type="text" value="">
+									<label for="birth_date">Birthdate</label>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="input-field">
+									<input id="birth_place" name="birth_place" type="text" value="">
+									<label for="birth_place">Birthplace</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-40">
+					<h3 class="text-extrabold">Your professional profile</h3>
+					<div class="col-xs-12 col-sm-6">
+
+						<div class="card card-panel passport">
+							<div class="file-field input-field">
+								<div class="btn btn-lg primary waves-effect waves-light">
+									<span>
+										<i class="material-icons">&#xE24D;</i>
+										Passport</span>
+									<input id="passport" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="passport" type="file">
+								</div>
+								<div class="existing-file">
+									<a href="#!" target="_blank">
+										<i class="material-icons">&#xE24D;</i>
+										passeport.jpg</a>
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text" placeholder="Upload your passport" readonly>
+								</div>
+							</div>
+
+							<div class="file-field input-field">
+								<div class="btn btn-lg primary waves-effect waves-light">
+									<span>
+										<i class="material-icons">&#xE24D;</i>
+										CV</span>
+									<input id="cv" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="cv" type="file">
+								</div>
+
+								<div class="existing-file">
+									<a href="#!" target="_blank">
+										<i class="material-icons">&#xE24D;</i>
+										CV.pdf</a>
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text" placeholder="Upload your Curriculum Vitae" readonly>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-sm-6">
+						<div class="col-xs-12 col-sm-12">
+							<div class="input-field" style="margin-top: 5px;">
+								<select id="job_sector" name="job_sector[]" multiple data-placeholder="Type in or Select job sector you would be interested in.">
+									<option value="">Choose an option...</option>
+									<option value="">job sector</option>
+								</select>
+								<label for="job_sector" class="active">Interest in job sector</label>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12">
+							<div class="input-field">
+								<select id="experience" required="required" name="experience">
+									<option value="">Choose</option>
+									<option value="3m">0 - 6 month</option>
+									<option value="6m">6 month - 1 year</option>
+									<option value="1y">1 - 2 years</option>
+									<option value="2y">2+ years</option>
+									<option value="5y" selected="selected">5+ years</option>
+									<option value="10y">10+ years</option>
+								</select>
+								<label for="experience" class="active">Experience</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12">
+						<div class="input-field">
+							<textarea class="materialize-textarea" id="description" name="description" cols="50" rows="10"></textarea>
+							<label for="description">Short description for your profile, as well as more personnal informations (e.g. your hobbies/interests ). You can also paste any link you want.</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section-padding gray-bg">
+			<div class="container">
+				<div class="row">
+					<h3 class="text-extrabold">Your K-Yachting account</h3>
+					<div class="col-xs-12 col-sm-4">
+						<div class="input-field">
+							<input required="required" id="email" name="email" type="email" value="">
+							<label for="email">Email</label>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<div class="input-field">
+							<input id="password" name="password" type="password" value="">
+							<label for="password">Change your password here</label>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<div class="input-field">
+							<input id="password_repeat" name="password_repeat" type="password" value="">
+							<label for="password_repeat">Confirm your new password</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 mt-40 mb-80 delete-account">
+						<a href="#!" onclick="return prompt('Please Type \'Delete my account\' to delete your K-Yachting Services account:') == 'Delete my account'" class="btn btn-block btn-lg waves-effect waves-light">
+							<i class="material-icons">&#xE872;</i>Delete my account</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<a href="#!" class="btn btn-block btn-lg border primary waves-effect waves-light">
+							<i class="fa fa-long-arrow-left"></i>
+							Back home</a>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-4">
+						<button type="submit" class="btn btn-block btn-lg gradient secondary waves-effect waves-light">
+							<span>
+								<strong>UPDATE</strong>
+								NOW</span>
+						</button>
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</form>
+{% endblock %}

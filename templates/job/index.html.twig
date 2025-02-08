@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+<!-- Page Header-->
+        <section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="white-text">Our job offers</h2>
+                        <span class="white-text">Search and filter by job category</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Content-->
+        <section id="job-offers" class="section-padding gray-bg">
+            <div class="container">
+                <div class="text-center mb-40">
+                    <h2 class="section-title">We have the perfect job for you</h2>
+                    <p class="section-sub">just like our candidates, we offer quality, serious & reliable job offers.</p>
+                </div>
+                <div class="portfolio-container">
+
+                    <ul class="portfolio-filter brand-filter text-center">
+                        <li class="active waves-effect waves-light" data-group="all">All</li>
+                        <li class=" waves-effect waves-light" data-group="commercial">Commercial</li>
+                        <li class=" waves-effect waves-light" data-group="retail">Retail sales</li>
+                        <li class=" waves-effect waves-light" data-group="creative">Creative</li>
+                        <li class=" waves-effect waves-light" data-group="technology">Technology</li>
+                        <li class=" waves-effect waves-light" data-group="marketing">Marketing & PR</li>
+                        <li class=" waves-effect waves-light" data-group="fashion">Fashion & luxury</li>
+                        <li class=" waves-effect waves-light" data-group="management">Management & HR</li>
+                    </ul>
+                    <div class="portfolio portfolio-with-title col-2 gutter mt-30">
+
+                        <div class="portfolio-item" data-groups='["all", "commercial"]'>
+                            <div class="portfolio-wrapper">
+                                <div class="card job-card">
+                                    <div class="card-content">
+                                        <span class="title">
+                                            <span class="card-title">2nd assistant position</span>
+                                            <span class="ref grey-text">Ref. 1062</span>
+                                        </span>
+                                        <div class="metas mb-20">
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE53E;</i>45k&euro;
+                                            </div>
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE916;</i>2018-10-01
+                                            </div>
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE55F;</i>Paris
+                                            </div>
+                                        </div>
+                                        <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_job_show', {slug: "2nd assistant position"}) }}">Details</a>
+                                        <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" data-groups='["all", "commercial"]'>
+                            <div class="portfolio-wrapper">
+                                <div class="card job-card">
+                                    <div class="card-content">
+                                        <span class="title">
+                                            <span class="card-title">2nd assistant position</span>
+                                            <span class="ref grey-text">Ref. 1062</span>
+                                        </span>
+                                        <div class="metas mb-20">
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE53E;</i>45k&euro;
+                                            </div>
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE916;</i>2018-10-01
+                                            </div>
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE55F;</i>Paris
+                                            </div>
+                                        </div>
+                                        <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_job_show', {slug: "2nd assistant position"}) }}">Details</a>
+                                        <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" data-groups='["all", "commercial"]'>
+                            <div class="portfolio-wrapper">
+                                <div class="card job-card">
+                                    <div class="card-content">
+                                        <span class="title">
+                                            <span class="card-title">2nd assistant position</span>
+                                            <span class="ref grey-text">Ref. 1062</span>
+                                        </span>
+                                        <div class="metas mb-20">
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE53E;</i>45k&euro;
+                                            </div>
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE916;</i>2018-10-01
+                                            </div>
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE55F;</i>Paris
+                                            </div>
+                                        </div>
+                                        <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_job_show', {slug: "2nd assistant position"}) }}">Details</a>
+                                        <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" data-groups='["all", "commercial"]'>
+                            <div class="portfolio-wrapper">
+                                <div class="card job-card">
+                                    <div class="card-content">
+                                        <span class="title">
+                                            <span class="card-title">2nd assistant position</span>
+                                            <span class="ref grey-text">Ref. 1062</span>
+                                        </span>
+                                        <div class="metas mb-20">
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE53E;</i>45k&euro;
+                                            </div>
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE916;</i>2018-10-01
+                                            </div>
+                                            <div class="meta">
+                                                <i class="material-icons">&#xE55F;</i>Paris
+                                            </div>
+                                        </div>
+                                        <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_job_show', {slug: "2nd assistant position"}) }}">Details</a>
+                                        <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="no-item"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-candidate bg-fixed bg-cover overlay dark-5 padding-top-70 padding-bottom-50">
+            <div class="container">
+                <div class="row">
+                    <div class="valign-wrapper text-center">
+                        <div class="hero-intro valign-cell">
+                            <h2 class="tt-headline clip is-full-width no-margin">
+                                <span>You are </span>
+                                <span class="tt-words-wrapper">
+                                    <b class="is-visible">Commercial</b>
+                                    <b>Creative</b>
+                                    <b>Marketing & PR</b>
+                                    <b>Technology</b>
+                                    <b>Fashion & luxury</b>
+                                    <b>Retail sales</b>
+                                </span>
+                            </h2>
+                            <h3 class="c-secondary mb-30 no-margin">Sign-up and apply for jobs now</h3>
+                            <p class="white-text section-sub">Each one of your skills is seen as precious resource to us, each one of your personality traits are considered as an added on value. Joining us is allowing our recruitment expertise and personal guidance to bring the best out in you by choosing the most suited position.</p>
+
+                            <a href="/register.html" class="btn border secondary waves-effect waves-light mt-40">Join us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+{% endblock %}

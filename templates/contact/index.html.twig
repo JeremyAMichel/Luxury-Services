@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<!-- Page Header-->
+	<section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="white-text">Feel free to contact us</h2>
+					<span class="white-text">for any questions or demands</span>
+					<ol class="breadcrumb">
+						<li>
+							<a href="#!">Home</a>
+						</li>
+						<li class="active">Contact</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Page Content-->
+	<form method="POST" action="#!" accept-charset="UTF-8" id="formContact" class="light-gray-bg">
+		<input name="_token" type="hidden" value="">
+		<input name="job_id" type="hidden" value="">
+		<section class="section-padding">
+			<div class="container">
+				<div class="text-center mb-80">
+					<h2 class="section-title text-uppercase">Drop us a line</h2>
+					<p class="section-sub text-center">Whether your needs, desires or wishes are urgent or a little less, they will all be taken care of with the some efficiency by us.</p>
+				</div>
+
+				<div class="row">
+					<div id="contactForm" class="col-xs-12 col-sm-12 col-md-8">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-field">
+									<input required="required" name="firstname" type="text">
+									<label for="firstname">First name</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-field">
+									<input required="required" name="lastname" type="text">
+									<label for="lastname">Last name</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-field">
+									<input required="required" name="email" type="email">
+									<label for="email">Email</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-field">
+									<input required="required" name="phone" type="tel">
+									<label for="phone">Phone Number</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-field">
+									<textarea class="materialize-textarea" required="required" name="message" cols="50" rows="10"></textarea>
+									<label for="message">Message</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-md-6 col-md-offset-3">
+								<button type="submit" name="submit" class="btn btn-block gradient primary waves-effect waves-light submit-button">
+									Send Message
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-sm-12 col-md-4 contact-info mt-40">
+
+						<address>
+							<i class="material-icons brand-color">&#xE55F;</i>
+							<div class="address">
+								<p>Luxury Services is based in Roanne, on Loire department</p>
+							</div>
+							<i class="material-icons brand-color">&#xE61C;</i>
+							<div class="phone">
+								<p>+33 (0) 6 60 06 66 00</p>
+							</div>
+							<i class="material-icons brand-color">&#xE916;</i>
+							<div class="phone">
+								<p>9 - 22h with 24/7 speaker</p>
+							</div>
+							<i class="material-icons brand-color">&#xE0E1;</i>
+							<div class="mail">
+								<p>
+									<a href="#!">georges[a]luxuryservices.com</a>
+								</p>
+							</div>
+						</address>
+					</div>
+				</div>
+			</div>
+		</section>
+	</form>
+	<div id="myMap" class="height-350">Gmap here</div>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+	<section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="white-text">Login</h2>
+					<span class="white-text">Welcome on board</span>
+					<ol class="breadcrumb">
+						<li>
+							<a href="{{ path('app_home') }}">Home</a>
+						</li>
+						<li class="active">Login</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Page Content-->
+	<section class="section-padding gray-bg log-section">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="card card-panel">
+						<h3 class="text-extrabold">Log in to your account</h3>
+
+						<form method="post">
+							{% if error %}
+								<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+							{% endif %}
+							<!-- Page Header-->
+
+
+							<div class="input-field">
+								<input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus data-parsley-trigger="change" data-parsley-error-message="A valid email address is required.">
+								<label for="username">Email</label>
+								<span class="help-block">Type your email address.</span>
+							</div>
+
+
+							<div class="input-field">
+								<input type="password" name="_password" id="password" required data-parsley-trigger="change" data-parsley-error-message="The password must be at least 6 characters.">
+								<label for="password">Password</label>
+								<i class="fa fa-eye show-password"></i>
+								<span class="help-block">Type your password.</span>
+							</div>
+
+                            <div class="checkbox">
+								<input type="checkbox" name="_remember_me" value="1" id="_remember_me" />
+								<label for="_remember_me">Keep me logged in</label>
+							</div>
+
+
+							<input
+							type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+							{#
+							Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+							See https://symfony.com/doc/current/security/remember_me.= #}
+
+							<button type="submit" class="btn btn-lg gradient secondary btn-block waves-effect waves-light mt-20 mb-20">Login</button>
+							<div class="links">
+								<a href="#!">Forgot your password?</a>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-6 col-md-8">
+					<div class="card card-panel ptb-70 text-center">
+						<div class="promo-info">
+							<h1 class="text-uppercase mb-30 text-extrabold font-30">New to Luxury Services ?</h1>
+							<p class="width-60 mb-30">Joining us is allowing our recruitment expertise and personal guidance to bring the best out in you by choosing the most suited position.</p>
+							<a href="{{ path('app_register') }}" class="btn btn-lg gradient secondary waves-effect waves-light mt-20">
+								<span>Sign-up<strong>
+										Free</strong>
+								</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+{% endblock %}

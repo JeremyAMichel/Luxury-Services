@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Playfair+Display:400,700,900');
+
+body .brand {
+    background: url('../img/luxury-services-logo.png') no-repeat center center;
+}
+body .cta-candidate {
+    background-image: url('../img/bg2.jpg')
+}
+body hr{
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+body .primary-text{
+    color: #b6a575!important;
+}
+body h1,
+body .h1,
+body  h2,
+body .h2,
+body  h3,
+body .h3,
+body  h4,
+body .h4
+body  h5,
+body .h5
+body  h6,
+body .h6{
+    font-family: 'Playfair Display', serif!important;
+}
+body p{
+    font-family: 'Open Sans', sans-serif!important;
+}
+body .tt-words-wrapper b{
+    text-transform: capitalize;
+}
+body .page-title-bg {
+    background-image: url('../img/bg3.jpg');
+}
+body .log-section form .checkbox label {
+    font-size: 16px
+}
+body .log-section form .checkbox label a {
+    color: #b6a575;
+    text-decoration: underline;
+    text-transform: inherit;
+    font-size: 16px
+}
+body .log-section form .links a {
+    display: block;
+    text-align: center;
+    color: #b6a575;
+    text-decoration: underline;
+    text-transform: inherit;
+    font-size: 16px
+}
+#candidateForm h3 {
+    margin-left: 15px;
+    margin-bottom: 0;
+    margin-top: 0
+}
+#candidateForm .select-dropdown {
+    font-size: 14px
+}
+#candidateForm .file-field .btn {
+    height: 50px;
+    line-height: 26px
+}
+#candidateForm .file-path {
+    margin-top: 1rem
+}
+#candidateForm .checkbox label {
+    font-size: 16px
+}
+#candidateForm .passport .file-field {
+    margin-top: 10px
+}
+#candidateForm .passport .checkbox {
+    width: 200px;
+    margin: 40px auto 5px
+}
+#candidateForm hr {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    border-top: 1px solid #ddd
+}
+#candidateForm .materialize-textarea {
+    padding: 0px !important
+}
+#candidateForm .btn i {
+    padding-right: 15px
+}
+#candidateForm .delete-account .btn {
+    margin-left: auto;
+    margin-right: auto;
+    width: 260px;
+    color: #99362c;
+    background-color: transparent;
+    border: 1px solid #99362c;
+    text-transform: initial
+}
+#candidateForm .delete-account .btn i {
+    vertical-align: sub
+}
+#candidateForm .delete-account .btn:hover {
+    color: #99362c !important
+}
+.quick-overview .btn-success {
+    color: #236944 !important;
+    border-color: #236944 !important;
+    background-color: #a9e2c4 !important;
+    opacity: 1 !important
+}
+.icon-hover-brand .icon {
+    color: #b6a575
+}
+.icon-hover-brand:hover .icon {
+    background-color: #b6a575
+}
+.promo-parallax {
+    background-image: url('../img/bg2.jpg');
+    background-color: rgba(0,0,0,0.5);
+    background-blend-mode: overlay
+}
+.promo-parallax h1,.promo-parallax p {
+    color: #fff
+}
+.contact-info i {
+    font-size: 30px;
+    line-height: 25px;
+    float: left;
+    margin-right: 18px;
+    padding-left: 2px;
+    position: relative;
+    top: 1px
+}
+.contact-info .address,.contact-info .phone,.contact-info .mail {
+    margin-bottom: 30px;
+    overflow: hidden
+}
+#mapcontent p {
+    margin: 0
+}
+#contactForm .file-field .btn {
+    height: 50px;
+    line-height: 26px
+}
+#contactForm .file-path {
+    margin-top: 1rem
+}
+#contactForm .materialize-textarea {
+    padding: 0px !important
+}
+#contactForm .submit-button {
+    margin-top: 45px !important
+}
+@media (min-width: 992px) {
+    #contactForm .submit-button {
+        float:right
+    }
+}
+#mapcontent h4 {
+    margin-top: 0
+}
