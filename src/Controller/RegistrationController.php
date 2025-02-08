@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
@@ -20,9 +21,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    public function __construct(private EmailVerifier $emailVerifier)
-    {
-    }
+    public function __construct(private EmailVerifier $emailVerifier) {}
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
@@ -38,11 +37,17 @@ class RegistrationController extends AbstractController
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-            $entityManager->persist($user);
+            // create a candidate profile when user register from front office
+            $candidate = new Candidate();
+            $candidate->setUser($user);
+
+            $entityManager->persist($candidate);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('support@luxury-services.com', 'Luxury Services Support'))
                     ->to((string) $user->getEmail())
@@ -66,7 +71,7 @@ class RegistrationController extends AbstractController
     {
         $id = $request->query->get('id');
         $logger->info('User email verification requested', ['id' => $id]);
-        
+
         if (null === $id) {
             return $this->redirectToRoute('app_register');
         }
@@ -90,5 +95,44 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_login');
+    }
+
+    #[Route('/verify/email/resend', name: 'app_resend_verification_email')]
+    public function resendVerificationEmail(Request $request, UserRepository $userRepository): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+
+        if (null === $user) {
+            return $this->redirectToRoute('app_register');
+        }
+
+        $email = $user->getEmail();
+
+        if (null === $email) {
+            return $this->redirectToRoute('app_register');
+        }   
+
+        if ($user->isVerified()) {
+            $this->addFlash('success', 'Your email address has already been verified.');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        // generate a signed url and email it to the user
+        $this->emailVerifier->sendEmailConfirmation(
+            'app_verify_email',
+            $user,
+            (new TemplatedEmail())
+                ->from(new Address('support@luxury-services.com', 'Luxury Services Support'))
+                ->to((string) $user->getEmail())
+                ->subject('Please Confirm your Email')
+                ->htmlTemplate('registration/confirmation_email.html.twig')
+        );
+
+        // do anything else you need here, like send an email
+        $this->addFlash('success', 'A new verification link has been sent to your email address.');
+
+        return $this->redirectToRoute('app_profile');
     }
 }

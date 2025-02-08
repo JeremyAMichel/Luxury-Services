@@ -13,7 +13,13 @@ final class ProfileController extends AbstractController
     #[Route('/profile', name: 'app_profile')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        
+        // TODO : if user is not verified, display a proper template
+        /** @var User */
+        $user = $this->getUser();
+
+        if($user->isVerified() === false) {
+            return $this->render('errors/not-verified.html.twig');
+        }
 
         return $this->render('profile/index.html.twig', [
             

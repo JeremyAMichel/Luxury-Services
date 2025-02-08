@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block styleCustom %}
+	<style>
+		select {
+			display: block !important;
+		}
+	</style>
+{% endblock %}
+
+
+{% block body %}
+	<!-- Page Header-->
+	<section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="white-text">Your profile</h2>
+					<span class="white-text">Personnal & Professionnal informations</span>
+					<ol class="breadcrumb">
+						<li>
+							<a href="{{ path('app_home') }}">Home</a>
+						</li>
+						<li class="active">Profile</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <section class="section-padding gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3 class="text-extrabold">Email not verified</h3>
+                    <p class="lead">You have not confirmed your email address. Please check your inbox to verify your email in order to access your profile page.</p>
+                    <a href="{{ path('app_resend_verification_email') }}" class="btn btn-lg gradient secondary waves-effect waves-light">
+                        Resend Verification Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
