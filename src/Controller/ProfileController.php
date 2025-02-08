@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidate;
+use App\Entity\User;
+use App\Form\CandidateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +26,24 @@ final class ProfileController extends AbstractController
 
         $candidate = $user->getCandidate();
 
+        if ($candidate === null) {
+            $candidate = new Candidate();
+            $candidate->setUser($user);
+        }
+
+        $form = $this->createForm(CandidateType::class, $candidate);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // dd($candidate);
+            $entityManager->persist($candidate);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_profile');
+        }
+
         return $this->render('profile/index.html.twig', [
-            
+            'form' => $form->createView(),
         
         ]);
     }

@@ -52,41 +52,61 @@
 		</div>
 	</section>
 
-	<form method="POST" action="#!" accept-charset="UTF-8" id="candidateForm" role="form" data-parsley-validate="" enctype="multipart/form-data"><input name="_token" type="hidden" value="UYfchy67WuTVzhSstPK1RDZEIfgqpKCcLnLyhf8a">
+	{{ form_start(form, {
+		'attr': {
+			'id': 'candidateForm',
+			'role': 'form',
+			'data-parsley-validate': '',
+			'enctype': 'multipart/form-data'
+		}
+	}) }}
 		<section class="section-padding">
 			<div class="container">
 				<div class="row">
 					<h3 class="text-extrabold">Your personal informations</h3>
+
+					{# Gender #}
 					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="input-field">
 							<select id="gender" name="gender">
-								<option value="">Choose an option...</option>
+								<option value="" selected="selected">Choose an option...</option>
 								<option value="male">Male</option>
-								<option value="female" selected="selected">Female</option>
+								<option value="female">Female</option>
 								<option value="transgender">Transgender</option>
 							</select>
 							<label for="gender" class="active">Gender</label>
 						</div>
 					</div>
+
 					<div class="clearfix visible-sm"></div>
+
+					{# Firstname #}
 					<div class="col-xs-12 col-sm-6 col-md-4">
-						<div class="input-field">
-							<input type="text" class="form-control" name="first_name" id="first_name" value="" required>
-							<label for="first_name">First name</label>
+						<div class="input-field">							
+							{{ form_widget(form.firstName) }}
+							{{ form_label(form.firstName) }}
+							{{ form_errors(form.firstName) }}
 						</div>
 					</div>
+
+					{# LastName #}
 					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="input-field">
-							<input type="text" class="form-control" name="last_name" id="last_name" value="" required>
-							<label for="last_name">Last name</label>
+							{{ form_widget(form.lastName) }}
+							{{ form_label(form.lastName) }}
+							{{ form_errors(form.lastName) }}
 						</div>
 					</div>
+
+					{# Current location #}
 					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="input-field">
-							<input required="required" id="current_location" name="current_location" type="text" value="">
+							<input id="current_location" name="current_location" type="text" value="">
 							<label for="current_location">Current location</label>
 						</div>
 					</div>
+
+					{# Address #}
 					<div class="col-xs-12 col-sm-8">
 						<div class="input-field">
 							<input id="address" name="address" type="text" value="">
@@ -95,6 +115,8 @@
 					</div>
 				</div>
 				<div class="row">
+
+					{# Profil Pic #}
 					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="file-field input-field" style="margin-top: 32px;">
 							<div class="btn btn-lg primary waves-effect waves-light">
@@ -114,26 +136,35 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="col-xs-12 col-sm-6 col-md-8">
 						<div class="row">
+
+							{# Country #}
 							<div class="col-xs-12 col-sm-6">
 								<div class="input-field">
 									<input id="country" name="country" type="text" value="">
 									<label for="country">Country</label>
 								</div>
 							</div>
+
+							{# Nationality #}
 							<div class="col-xs-12 col-sm-6">
 								<div class="input-field">
 									<input id="nationality" name="nationality" type="text" value="">
 									<label for="nationality">Nationality</label>
 								</div>
 							</div>
+
+							{# Birthdate #}
 							<div class="col-xs-12 col-sm-6">
 								<div class="input-field">
 									<input class="datepicker" id="birth_date" name="birth_date" type="text" value="">
 									<label for="birth_date">Birthdate</label>
 								</div>
 							</div>
+							
+							{# Birthplace #}
 							<div class="col-xs-12 col-sm-6">
 								<div class="input-field">
 									<input id="birth_place" name="birth_place" type="text" value="">
@@ -148,6 +179,8 @@
 					<div class="col-xs-12 col-sm-6">
 
 						<div class="card card-panel passport">
+
+							{# Passport #}
 							<div class="file-field input-field">
 								<div class="btn btn-lg primary waves-effect waves-light">
 									<span>
@@ -165,6 +198,7 @@
 								</div>
 							</div>
 
+							{# CV #}
 							<div class="file-field input-field">
 								<div class="btn btn-lg primary waves-effect waves-light">
 									<span>
@@ -187,6 +221,8 @@
 					</div>
 
 					<div class="col-xs-12 col-sm-6">
+
+						{# Job Category #}
 						<div class="col-xs-12 col-sm-12">
 							<div class="input-field" style="margin-top: 5px;">
 								<select id="job_sector" name="job_sector[]" multiple data-placeholder="Type in or Select job sector you would be interested in.">
@@ -196,9 +232,11 @@
 								<label for="job_sector" class="active">Interest in job sector</label>
 							</div>
 						</div>
+
+						{# Experience #}
 						<div class="col-xs-12 col-sm-12">
 							<div class="input-field">
-								<select id="experience" required="required" name="experience">
+								<select id="experience"  name="experience">
 									<option value="">Choose</option>
 									<option value="3m">0 - 6 month</option>
 									<option value="6m">6 month - 1 year</option>
@@ -210,7 +248,10 @@
 								<label for="experience" class="active">Experience</label>
 							</div>
 						</div>
+
 					</div>
+
+					{# Description #}
 					<div class="col-xs-12 col-sm-12">
 						<div class="input-field">
 							<textarea class="materialize-textarea" id="description" name="description" cols="50" rows="10"></textarea>
@@ -224,19 +265,25 @@
 		<section class="section-padding gray-bg">
 			<div class="container">
 				<div class="row">
-					<h3 class="text-extrabold">Your K-Yachting account</h3>
+					<h3 class="text-extrabold">Your Luxury Services account</h3>
+
+					{# Email #}
 					<div class="col-xs-12 col-sm-4">
 						<div class="input-field">
-							<input required="required" id="email" name="email" type="email" value="">
+							<input id="email" name="email" type="email" value="">
 							<label for="email">Email</label>
 						</div>
 					</div>
+
+					{# Password Change #}
 					<div class="col-xs-12 col-sm-4">
 						<div class="input-field">
 							<input id="password" name="password" type="password" value="">
 							<label for="password">Change your password here</label>
 						</div>
 					</div>
+
+					{# Confirm Password #}
 					<div class="col-xs-12 col-sm-4">
 						<div class="input-field">
 							<input id="password_repeat" name="password_repeat" type="password" value="">
@@ -244,12 +291,16 @@
 						</div>
 					</div>
 				</div>
+
+				{# Delete Account #}
 				<div class="row">
 					<div class="col-xs-12 mt-40 mb-80 delete-account">
 						<a href="#!" onclick="return prompt('Please Type \'Delete my account\' to delete your Luxury Services account:') == 'Delete my account'" class="btn btn-block btn-lg waves-effect waves-light">
 							<i class="material-icons">&#xE872;</i>Delete my account</a>
 					</div>
 				</div>
+
+
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-4">
 						<a href="{{ path('app_home') }}" class="btn btn-block btn-lg border primary waves-effect waves-light">
@@ -267,5 +318,5 @@
 
 			</div>
 		</section>
-	</form>
+	{{ form_end(form) }}
 {% endblock %}
