@@ -1,5 +1,27 @@
 {% extends 'base.html.twig' %}
 
+{% block styleCustom %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var map = L.map('myMap').setView([45.4382157, 4.3805858], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            L.marker([45.4382157, 4.3805858]).addTo(map)
+                .bindPopup('Luxury Services')
+                .openPopup();
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
 
 	<!-- Page Header-->
@@ -105,6 +127,6 @@
 			</div>
 		</section>
 	</form>
-	<div id="myMap" class="height-350">Gmap here</div>
+	<div id="myMap"></div>
 
 {% endblock %}
