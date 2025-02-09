@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="section-padding gray-bg log-section" style="display: flex; justify-content: center; align-items: center; padding-top: 200px;">
+        <div class="container">
+            <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="card card-panel">
+                        <h3 class="text-extrabold">Reset your password</h3>
+
+                        {{ form_start(resetForm) }}
+                            <div class="input-field">
+                                {{ form_widget(resetForm.plainPassword.first) }}
+                                {{ form_label(resetForm.plainPassword.first) }}
+                                {{ form_errors(resetForm.plainPassword.first) }}
+                            </div>
+
+                            <div class="input-field">
+                                {{ form_widget(resetForm.plainPassword.second) }}
+                                {{ form_label(resetForm.plainPassword.second) }}
+                                {{ form_errors(resetForm.plainPassword.second) }}
+                            </div>
+
+                            <button type="submit" class="btn btn-lg gradient secondary btn-block waves-effect waves-light mt-20 mb-20">Reset password</button>
+                        {{ form_end(resetForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
