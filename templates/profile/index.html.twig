@@ -21,7 +21,6 @@
 			const profilPicturePathInput = document.getElementById('file-path-photo');
 			const existingProfilPictureFile = document.getElementById('existing-file-photo');
 
-
 			profilPictureInput.addEventListener('change', function () {
 				if (profilPictureInput.files.length > 0) {
 					profilPicturePathInput.value = profilPictureInput.files[0].name;
@@ -33,11 +32,21 @@
 			const passportPathInput = document.getElementById('file-path-passport');
 			const existingPassportFile = document.getElementById('existing-file-passport');
 
-
 			passportInput.addEventListener('change', function () {
 				if (passportInput.files.length > 0) {
 					passportPathInput.value = passportInput.files[0].name;
 					existingPassportFile.style.display = 'none';
+				}
+			});
+
+			const cvInput = document.getElementById('candidate_cvFile');
+			const cvPathInput = document.getElementById('file-path-cv');
+			const existingCvFile = document.getElementById('existing-file-cv');
+
+			cvInput.addEventListener('change', function () {
+				if (cvInput.files.length > 0) {
+					cvPathInput.value = cvInput.files[0].name;
+					existingCvFile.style.display = 'none';
 				}
 			});
 		});
@@ -230,8 +239,9 @@
 							<div class="btn btn-lg primary waves-effect waves-light">
 								<span>
 									<i class="material-icons">&#xE24D;</i>
-									Passport</span>								
-									{{ form_widget(form.passportFile) }}
+									Passport
+								</span>								
+								{{ form_widget(form.passportFile) }}
 							</div>
 
 							{% if candidate.passport %}
@@ -242,6 +252,7 @@
 								</a>
 							</div>
 							{% endif %}
+
 							<div class="file-path-wrapper">
 								<input id="file-path-passport" class="file-path validate" type="text" placeholder="Upload your passport" readonly>
 							</div>
@@ -252,17 +263,22 @@
 							<div class="btn btn-lg primary waves-effect waves-light">
 								<span>
 									<i class="material-icons">&#xE24D;</i>
-									CV</span>
-								<input id="cv" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="cv" type="file">
+									CV
+								</span>
+								{{ form_widget(form.cvFile) }}
 							</div>
 
-							<div class="existing-file">
-								<a href="#!" target="_blank">
+							{% if candidate.cv %}
+							<div id="existing-file-cv" class="existing-file">
+								<a href="{{ asset('uploads/curriculum-vitae/' ~ candidate.cv) }}" target="_blank">
 									<i class="material-icons">&#xE24D;</i>
-									CV.pdf</a>
+									{{ originalCv }}
+								</a>
 							</div>
+							{% endif %}
+
 							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text" placeholder="Upload your Curriculum Vitae" readonly>
+								<input id="file-path-cv" class="file-path validate" type="text" placeholder="Upload your Curriculum Vitae" readonly>
 							</div>
 						</div>
 
@@ -312,24 +328,27 @@
 				{# Email #}
 				<div class="col-xs-12 col-sm-4">
 					<div class="input-field">
-						<input id="email" name="email" type="email" value="">
-						<label for="email">Email</label>
+						{{ form_widget(form.email) }}
+						{{ form_label(form.email) }}
+						{{ form_errors(form.email) }}
 					</div>
 				</div>
 
 				{# Password Change #}
 				<div class="col-xs-12 col-sm-4">
 					<div class="input-field">
-						<input id="password" name="password" type="password" value="">
-						<label for="password">Change your password here</label>
+						{{ form_widget(form.newPassword.first) }}
+						{{ form_label(form.newPassword.first) }}
+						{{ form_errors(form.newPassword.first) }}
 					</div>
 				</div>
 
 				{# Confirm Password #}
 				<div class="col-xs-12 col-sm-4">
 					<div class="input-field">
-						<input id="password_repeat" name="password_repeat" type="password" value="">
-						<label for="password_repeat">Confirm your new password</label>
+						{{ form_widget(form.newPassword.second) }}
+						{{ form_label(form.newPassword.second) }}
+						{{ form_errors(form.newPassword.second) }}
 					</div>
 				</div>
 			</div>
