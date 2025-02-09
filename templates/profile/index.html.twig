@@ -42,7 +42,7 @@
 					<h4>
 						<img src="{{ asset('img/s9bPVaK.gif') }}" style="height: 80px; width: 201px;">
 						&nbsp;
-																		                            &nbsp; Hooray ! Your profile is complete.
+																								                            &nbsp; Hooray ! Your profile is complete.
 					</h4>
 					<div class="c100 p100 small complete ">
 						<span>100%</span>
@@ -85,7 +85,7 @@
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="input-field">
 						{{ form_widget(form.firstName) }}
-						{{ form_label(form.firstName) }}
+						<label for="{{ form.firstName.vars.id }}" class="{% if form.firstName.vars.value %}active{% endif %}">{{ form.firstName.vars.label }}</label>
 						{{ form_errors(form.firstName) }}
 					</div>
 				</div>
@@ -94,7 +94,7 @@
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="input-field">
 						{{ form_widget(form.lastName) }}
-						{{ form_label(form.lastName) }}
+						<label for="{{ form.lastName.vars.id }}" class="{% if form.lastName.vars.value %}active{% endif %}">{{ form.lastName.vars.label }}</label>
 						{{ form_errors(form.lastName) }}
 					</div>
 				</div>
@@ -103,7 +103,7 @@
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="input-field">
 						{{ form_widget(form.currentLocation) }}
-						{{ form_label(form.currentLocation) }}
+						<label for="{{ form.currentLocation.vars.id }}" class="{% if form.currentLocation.vars.value %}active{% endif %}">{{ form.currentLocation.vars.label }}</label>
 						{{ form_errors(form.currentLocation) }}
 					</div>
 				</div>
@@ -112,7 +112,7 @@
 				<div class="col-xs-12 col-sm-8">
 					<div class="input-field">
 						{{ form_widget(form.address) }}
-						{{ form_label(form.address) }}
+						<label for="{{ form.address.vars.id }}" class="{% if form.address.vars.value %}active{% endif %}">{{ form.address.vars.label }}</label>
 						{{ form_errors(form.address) }}
 					</div>
 				</div>
@@ -149,7 +149,7 @@
 						<div class="col-xs-12 col-sm-6">
 							<div class="input-field">
 								{{ form_widget(form.country) }}
-								{{ form_label(form.country) }}
+								<label for="{{ form.country.vars.id }}" class="{% if form.country.vars.value %}active{% endif %}">{{ form.country.vars.label }}</label>
 								{{ form_errors(form.country) }}
 							</div>
 						</div>
@@ -158,17 +158,14 @@
 						<div class="col-xs-12 col-sm-6">
 							<div class="input-field">
 								{{ form_widget(form.nationality) }}
-								{{ form_label(form.nationality) }}
+								<label for="{{ form.nationality.vars.id }}" class="{% if form.nationality.vars.value %}active{% endif %}">{{ form.nationality.vars.label }}</label>
 								{{ form_errors(form.nationality) }}
 							</div>
 						</div>
 
 						{# Birthdate #}
 						<div class="col-xs-12 col-sm-6">
-							<div
-								class="input-field">
-								{# <input class="datepicker" id="birth_date" name="birth_date" type="text" value="">
-																<label for="birth_date">Birthdate</label> #}
+							<div class="input-field">
 								{{ form_widget(form.birthDate) }}
 								{{ form_label(form.birthDate) }}
 								{{ form_errors(form.birthDate) }}
@@ -178,8 +175,9 @@
 						{# Birthplace #}
 						<div class="col-xs-12 col-sm-6">
 							<div class="input-field">
-								<input id="birth_place" name="birth_place" type="text" value="">
-								<label for="birth_place">Birthplace</label>
+								{{ form_widget(form.birthPlace) }}
+								<label for="{{ form.birthPlace.vars.id }}" class="{% if form.birthPlace.vars.value %}active{% endif %}">{{ form.birthPlace.vars.label }}</label>
+								{{ form_errors(form.birthPlace) }}
 							</div>
 						</div>
 					</div>
@@ -267,8 +265,9 @@
 				{# Description #}
 				<div class="col-xs-12 col-sm-12">
 					<div class="input-field">
-						<textarea class="materialize-textarea" id="description" name="description" cols="50" rows="10"></textarea>
-						<label for="description">Short description for your profile, as well as more personnal informations (e.g. your hobbies/interests ). You can also paste any link you want.</label>
+						{{ form_widget(form.description) }}
+						<label for="{{ form.description.vars.id }}" class="{% if form.description.vars.value %}active{% endif %}">{{ form.description.vars.label }}</label>
+						{{ form_errors(form.description) }}
 					</div>
 				</div>
 			</div>
