@@ -27,19 +27,19 @@ class FileUploader
         }
 
         /// delete the old file
-        $this->removeOldFile($entity, $fieldName);
+        $this->removeOldFile($entity, $fieldName, $folder);
 
         return $fileName;
         
     }
 
-    private function removeOldFile(object $entity, string $fieldName): void
+    private function removeOldFile(object $entity, string $fieldName, string $folder): void
     {
         $getter = 'get' . ucfirst($fieldName);
         $oldFile = $entity->$getter();
 
         if ($oldFile) {
-            $oldFilePath = $this->getTargetDirectory() . '/' . $oldFile;
+            $oldFilePath = $this->getTargetDirectory() . '/' . $folder . '/' . $oldFile;
             if (file_exists($oldFilePath)) {
                 unlink($oldFilePath);
             }
