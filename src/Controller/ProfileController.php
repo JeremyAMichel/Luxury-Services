@@ -5,15 +5,14 @@ namespace App\Controller;
 use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\CandidateType;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 final class ProfileController extends AbstractController
 {
@@ -21,8 +20,7 @@ final class ProfileController extends AbstractController
     public function index(
         Request $request,
         EntityManagerInterface $entityManager,
-        SluggerInterface $slugger,
-        #[Autowire('%kernel.project_dir%/assets/uploads/profil-picture')] string $profilePictureDirectory
+        FileUploader $fileUploader
     ): Response {
         // TODO : if user is not verified, display a proper template
         /** @var User */
@@ -49,24 +47,8 @@ final class ProfileController extends AbstractController
             // this condition is needed because the 'profilePicture' field is not required
             // so the file must be processed only when a file is uploaded
             if ($profilePictureFile) {
-                $originalFilename = pathinfo($profilePictureFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $profilePictureFile->guessExtension();
-
-                try {
-                    $profilePictureFile->move($profilePictureDirectory, $newFilename);
-                } catch (FileException $e) {
-                    $this->addFlash('error', 'There was a problem uploading your profile picture. Please try again.');
-                    return $this->redirectToRoute('app_profile');
-                }
-
-                // delete the old profile picture
-                if ($candidate->getProfilPicture()) {
-                    unlink($profilePictureDirectory . '/' . $candidate->getProfilPicture());
-                }
-
-                $candidate->setProfilPicture($newFilename);
+                $profilePictureName = $fileUploader->upload($profilePictureFile, $candidate, 'profilPicture', 'profile-pictures');
+                $candidate->setProfilPicture($profilePictureName);
             }
 
             $entityManager->persist($candidate);
