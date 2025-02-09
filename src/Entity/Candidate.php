@@ -26,16 +26,13 @@ class Candidate
 
     #[ORM\Column]
     #[Assert\NotNull]
-    #[Assert\DateTime()]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     #[Assert\NotNull]
-    #[Assert\DateTime()]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\DateTime()]
     private ?\DateTimeImmutable $deletedAt = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
@@ -63,7 +60,6 @@ class Candidate
     private ?string $nationality = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
-    #[Assert\Date()]
     private ?\DateTimeImmutable $birthDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -81,6 +77,10 @@ class Candidate
 
     #[ORM\ManyToOne(inversedBy: 'candidates')]
     private ?Experience $experience = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255)]
+    private ?string $profilPicture = null;
 
     public function __construct(DateTimeImmutable $createdAt = new DateTimeImmutable(), DateTimeImmutable $updatedAt = new DateTimeImmutable())
     {
@@ -293,6 +293,18 @@ class Candidate
     public function setExperience(?Experience $experience): static
     {
         $this->experience = $experience;
+
+        return $this;
+    }
+
+    public function getProfilPicture(): ?string
+    {
+        return $this->profilPicture;
+    }
+
+    public function setProfilPicture(?string $profilPicture): static
+    {
+        $this->profilPicture = $profilPicture;
 
         return $this;
     }

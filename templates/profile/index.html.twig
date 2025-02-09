@@ -13,6 +13,26 @@
 	</style>
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileInput = document.getElementById('candidate_profilPictureFile');
+            const filePathInput = document.getElementById('file-path');
+			const existingFile = document.getElementById('existing-file');
+			console.log(existingFile);
+			
+
+            fileInput.addEventListener('change', function () {
+                if (fileInput.files.length > 0) {
+                    filePathInput.value = fileInput.files[0].name;
+					existingFile.style.display = 'none';
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
 
 {% block body %}
 	<!-- Page Header-->
@@ -127,16 +147,20 @@
 							<span>
 								<i class="material-icons">insert_photo</i>
 								Photo</span>
-							<input id="photo" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="photo" type="file">
+							{{ form_widget(form.profilPictureFile) }}
+							
 						</div>
 
-						<div class="existing-file">
-							<a href="#!" target="_blank">
+						{% if candidate.profilPicture %}
+						 <div id="existing-file" class="existing-file">
+							<a href="{{ asset('uploads/profil-picture/' ~ candidate.profilPicture) }}" target="_blank">
 								<i class="material-icons">&#xE24D;</i>
-								profil_picture.jpg</a>
+								{{ originalProfilPicture }}
+							</a>
 						</div>
+						{% endif %}
 						<div class="file-path-wrapper">
-							<input class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
+							<input id="file-path" class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
 						</div>
 					</div>
 				</div>
