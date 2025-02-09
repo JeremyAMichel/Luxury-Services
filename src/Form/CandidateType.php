@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Candidate;
+use App\Entity\Category;
+use App\Entity\Experience;
 use App\Entity\Gender;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -100,8 +102,6 @@ class CandidateType extends AbstractType
                     'id' => 'birth_place',
                 ],
             ])
-            // <textarea class="materialize-textarea" id="description" name="description" cols="50" rows="10"></textarea>
-            // <label for="description">Short description for your profile, as well as more personnal informations (e.g. your hobbies/interests ). You can also paste any link you want.</label>
             ->add('description', TextareaType::class, [
                 'required' => false,
                 'label' => 'Short description for your profile, as well as more personnal informations (e.g. your hobbies/interests ). You can also paste any link you want.',
@@ -110,6 +110,33 @@ class CandidateType extends AbstractType
                     'class' => 'materialize-textarea',
                     'cols' => 50,
                     'rows' => 10,
+                ],
+            ])
+            ->add('jobCategory', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'required' => false,
+                'placeholder' => 'Choose an option...',
+                'label' => 'Interest in job sector',
+                'attr' => [
+                    'id' => 'job_sector',
+                    'data-placeholder' => 'Type in or Select job sector you would be interested in.',
+                ],
+                'label_attr' => [
+                    'class' => 'active',
+                ],
+            ])
+            ->add('experience', EntityType::class, [
+                'class' => Experience::class,
+                'choice_label' => 'name',
+                'required' => false,
+                'placeholder' => 'Choose an option...',
+                'label' => 'Experience',
+                'attr' => [
+                    'id' => 'experience',
+                ],
+                'label_attr' => [
+                    'class' => 'active',
                 ],
             ])
             ->addEventListener(FormEvents::POST_SUBMIT, $this->setUpdatedAt(...))

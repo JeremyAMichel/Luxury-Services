@@ -236,27 +236,18 @@
 					{# Job Category #}
 					<div class="col-xs-12 col-sm-12">
 						<div class="input-field" style="margin-top: 5px;">
-							<select id="job_sector" name="job_sector[]" multiple data-placeholder="Type in or Select job sector you would be interested in.">
-								<option value="">Choose an option...</option>
-								<option value="">job sector</option>
-							</select>
-							<label for="job_sector" class="active">Interest in job sector</label>
+							{{ form_widget(form.jobCategory) }}
+							{{ form_label(form.jobCategory) }}
+							{{ form_errors(form.jobCategory) }}
 						</div>
 					</div>
 
 					{# Experience #}
 					<div class="col-xs-12 col-sm-12">
 						<div class="input-field">
-							<select id="experience" name="experience">
-								<option value="">Choose</option>
-								<option value="3m">0 - 6 month</option>
-								<option value="6m">6 month - 1 year</option>
-								<option value="1y">1 - 2 years</option>
-								<option value="2y">2+ years</option>
-								<option value="5y" selected="selected">5+ years</option>
-								<option value="10y">10+ years</option>
-							</select>
-							<label for="experience" class="active">Experience</label>
+							{{ form_widget(form.experience) }}
+							{{ form_label(form.experience) }}
+							{{ form_errors(form.experience) }}
 						</div>
 					</div>
 
