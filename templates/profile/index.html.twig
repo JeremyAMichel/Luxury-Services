@@ -5,6 +5,11 @@
 		select {
 			display: block !important;
 		}
+
+		.tp-caption.boxshadow,
+		.boxshadow {
+			box-shadow: none !important;
+		}
 	</style>
 {% endblock %}
 
@@ -37,7 +42,7 @@
 					<h4>
 						<img src="{{ asset('img/s9bPVaK.gif') }}" style="height: 80px; width: 201px;">
 						&nbsp;
-												                            &nbsp; Hooray ! Your profile is complete.
+																		                            &nbsp; Hooray ! Your profile is complete.
 					</h4>
 					<div class="c100 p100 small complete ">
 						<span>100%</span>
@@ -160,9 +165,13 @@
 
 						{# Birthdate #}
 						<div class="col-xs-12 col-sm-6">
-							<div class="input-field">
-								<input class="datepicker" id="birth_date" name="birth_date" type="text" value="">
-								<label for="birth_date">Birthdate</label>
+							<div
+								class="input-field">
+								{# <input class="datepicker" id="birth_date" name="birth_date" type="text" value="">
+																<label for="birth_date">Birthdate</label> #}
+								{{ form_widget(form.birthDate) }}
+								{{ form_label(form.birthDate) }}
+								{{ form_errors(form.birthDate) }}
 							</div>
 						</div>
 
