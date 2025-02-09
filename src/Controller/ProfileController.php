@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\CandidateType;
-use App\Service\FileUploader;
+use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -43,12 +43,20 @@ final class ProfileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $profilePictureFile */
             $profilePictureFile = $form->get('profilPictureFile')->getData();
+            $passportFile = $form->get('passportFile')->getData();
 
             // this condition is needed because the 'profilePicture' field is not required
             // so the file must be processed only when a file is uploaded
             if ($profilePictureFile) {
                 $profilePictureName = $fileUploader->upload($profilePictureFile, $candidate, 'profilPicture', 'profile-pictures');
                 $candidate->setProfilPicture($profilePictureName);
+            }
+
+            // this condition is needed because the 'passportFile' field is not required
+            // so the file must be processed only when a file is uploaded
+            if ($passportFile) {
+                $passportName = $fileUploader->upload($passportFile, $candidate, 'passport', 'passport');
+                $candidate->setPassport($passportName);
             }
 
             $entityManager->persist($candidate);
@@ -60,13 +68,18 @@ final class ProfileController extends AbstractController
         }
 
         if ($candidate->getProfilPicture()) {
-            $originalFilename = preg_replace('/-\w{13}(?=\.\w{3,4}$)/', '', $candidate->getProfilPicture());
+            $originalProfilePictureFilename = preg_replace('/-\w{13}(?=\.\w{3,4}$)/', '', $candidate->getProfilPicture());
+        }
+
+        if ($candidate->getPassport()) {
+            $originalPassportFilename = preg_replace('/-\w{13}(?=\.\w{3,4}$)/', '', $candidate->getPassport());
         }
 
         return $this->render('profile/index.html.twig', [
             'form' => $form->createView(),
             'candidate' => $candidate,
-            'originalProfilPicture' => $originalFilename ?? null,
+            'originalProfilPicture' => $originalProfilePictureFilename ?? null,
+            'originalPassport' => $originalPassportFilename ?? null,
         ]);
     }
 }

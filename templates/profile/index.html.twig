@@ -14,23 +14,34 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const fileInput = document.getElementById('candidate_profilPictureFile');
-            const filePathInput = document.getElementById('file-path');
-			const existingFile = document.getElementById('existing-file');
-			console.log(existingFile);
-			
+	{{ parent() }}
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const profilPictureInput = document.getElementById('candidate_profilPictureFile');
+			const profilPicturePathInput = document.getElementById('file-path-photo');
+			const existingProfilPictureFile = document.getElementById('existing-file-photo');
 
-            fileInput.addEventListener('change', function () {
-                if (fileInput.files.length > 0) {
-                    filePathInput.value = fileInput.files[0].name;
-					existingFile.style.display = 'none';
-                }
-            });
-        });
-    </script>
+
+			profilPictureInput.addEventListener('change', function () {
+				if (profilPictureInput.files.length > 0) {
+					profilPicturePathInput.value = profilPictureInput.files[0].name;
+					existingProfilPictureFile.style.display = 'none';
+				}
+			});
+
+			const passportInput = document.getElementById('candidate_passportFile');
+			const passportPathInput = document.getElementById('file-path-passport');
+			const existingPassportFile = document.getElementById('existing-file-passport');
+
+
+			passportInput.addEventListener('change', function () {
+				if (passportInput.files.length > 0) {
+					passportPathInput.value = passportInput.files[0].name;
+					existingPassportFile.style.display = 'none';
+				}
+			});
+		});
+	</script>
 {% endblock %}
 
 
@@ -62,7 +73,7 @@
 					<h4>
 						<img src="{{ asset('img/s9bPVaK.gif') }}" style="height: 80px; width: 201px;">
 						&nbsp;
-																								                            &nbsp; Hooray ! Your profile is complete.
+																														                            &nbsp; Hooray ! Your profile is complete.
 					</h4>
 					<div class="c100 p100 small complete ">
 						<span>100%</span>
@@ -148,19 +159,19 @@
 								<i class="material-icons">insert_photo</i>
 								Photo</span>
 							{{ form_widget(form.profilPictureFile) }}
-							
+
 						</div>
 
 						{% if candidate.profilPicture %}
-						 <div id="existing-file" class="existing-file">
-							<a href="{{ asset('uploads/profile-pictures/' ~ candidate.profilPicture) }}" target="_blank">
-								<i class="material-icons">&#xE24D;</i>
-								{{ originalProfilPicture }}
-							</a>
-						</div>
+							<div id="existing-file-photo" class="existing-file">
+								<a href="{{ asset('uploads/profile-pictures/' ~ candidate.profilPicture) }}" target="_blank">
+									<i class="material-icons">&#xE24D;</i>
+									{{ originalProfilPicture }}
+								</a>
+							</div>
 						{% endif %}
 						<div class="file-path-wrapper">
-							<input id="file-path" class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
+							<input id="file-path-photo" class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
 						</div>
 					</div>
 				</div>
@@ -219,16 +230,20 @@
 							<div class="btn btn-lg primary waves-effect waves-light">
 								<span>
 									<i class="material-icons">&#xE24D;</i>
-									Passport</span>
-								<input id="passport" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="passport" type="file">
+									Passport</span>								
+									{{ form_widget(form.passportFile) }}
 							</div>
-							<div class="existing-file">
-								<a href="#!" target="_blank">
+
+							{% if candidate.passport %}
+							<div id="existing-file-passport" class="existing-file">
+								<a href="{{ asset('uploads/passport/' ~ candidate.passport) }}" target="_blank">
 									<i class="material-icons">&#xE24D;</i>
-									passeport.jpg</a>
+									{{ originalPassport }}
+								</a>
 							</div>
+							{% endif %}
 							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text" placeholder="Upload your passport" readonly>
+								<input id="file-path-passport" class="file-path validate" type="text" placeholder="Upload your passport" readonly>
 							</div>
 						</div>
 

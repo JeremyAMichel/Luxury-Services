@@ -82,6 +82,12 @@ class Candidate
     #[Assert\Length(max: 255)]
     private ?string $profilPicture = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $passport = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $cv = null;
+
     public function __construct(DateTimeImmutable $createdAt = new DateTimeImmutable(), DateTimeImmutable $updatedAt = new DateTimeImmutable())
     {
         $this->createdAt = $createdAt;
@@ -305,6 +311,30 @@ class Candidate
     public function setProfilPicture(?string $profilPicture): static
     {
         $this->profilPicture = $profilPicture;
+
+        return $this;
+    }
+
+    public function getPassport(): ?string
+    {
+        return $this->passport;
+    }
+
+    public function setPassport(?string $passport): static
+    {
+        $this->passport = $passport;
+
+        return $this;
+    }
+
+    public function getCv(): ?string
+    {
+        return $this->cv;
+    }
+
+    public function setCv(?string $cv): static
+    {
+        $this->cv = $cv;
 
         return $this;
     }
