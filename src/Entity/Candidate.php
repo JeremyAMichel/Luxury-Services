@@ -25,16 +25,22 @@ class Candidate
     private ?string $lastName = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\DateTime()]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\DateTime()]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\DateTime()]
     private ?\DateTimeImmutable $deletedAt = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'candidates')]
@@ -57,9 +63,11 @@ class Candidate
     private ?string $nationality = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    #[Assert\Date()]
     private ?\DateTimeImmutable $birthDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255)]
     private ?string $birthPlace = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
