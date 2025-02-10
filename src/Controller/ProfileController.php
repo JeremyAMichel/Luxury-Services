@@ -5,16 +5,13 @@ namespace App\Controller;
 use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\CandidateType;
-use App\Services\FileUploader;
+use App\Services\FileHandler;
+use App\Services\PasswordUpdater;
 use App\Services\ProfileProgressCalculator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 
@@ -24,9 +21,8 @@ final class ProfileController extends AbstractController
     public function index(
         Request $request,
         EntityManagerInterface $entityManager,
-        FileUploader $fileUploader,
-        UserPasswordHasherInterface $passwordHasher, 
-        MailerInterface $mailer,
+        FileHandler $fileHandler,
+        PasswordUpdater $passwordUpdater,
         ProfileProgressCalculator $progressCalculator
     ): Response {
       
@@ -39,67 +35,28 @@ final class ProfileController extends AbstractController
 
         $candidate = $user->getCandidate();
 
-        if ($candidate === null) {
-            $candidate = new Candidate();
-            $candidate->setUser($user);
-        }
+        // If the user does not have a candidate profile, create a new one
+        $candidate = $user->getCandidate() ?? new Candidate();
+        $candidate->setUser($user);
 
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $profilePictureFile */
-            $profilePictureFile = $form->get('profilPictureFile')->getData();
-            $passportFile = $form->get('passportFile')->getData();
-            $cvFile = $form->get('cvFile')->getData();
-
-            // this condition is needed because the 'profilePicture' field is not required
-            // so the file must be processed only when a file is uploaded
-            if ($profilePictureFile) {
-                $profilePictureName = $fileUploader->upload($profilePictureFile, $candidate, 'profilPicture', 'profile-pictures');
-                $candidate->setProfilPicture($profilePictureName);
-            }
-
-            // this condition is needed because the 'passportFile' field is not required
-            // so the file must be processed only when a file is uploaded
-            if ($passportFile) {
-                $passportName = $fileUploader->upload($passportFile, $candidate, 'passport', 'passport');
-                $candidate->setPassport($passportName);
-            }
-
-            // this condition is needed because the 'cvFile' field is not required
-            // so the file must be processed only when a file is uploaded
-            if ($cvFile) {
-                $cvName = $fileUploader->upload($cvFile, $candidate, 'cv', 'curriculum-vitae');
-                $candidate->setCv($cvName);
-            }
+            $files = [
+                'profilPicture' => $form->get('profilPictureFile')->getData(),
+                'passport' => $form->get('passportFile')->getData(),
+                'cv' => $form->get('cvFile')->getData(),
+            ];
+            $fileHandler->handleFiles($candidate, $files);
 
             $email = $form->get('email')->getData();
             $newPassword = $form->get('newPassword')->getData();
 
-            if ($email || $newPassword) {
-                if ($email && $newPassword) {
-                    if ($user->getEmail() !== $email) {
-                        $this->addFlash('danger', 'The email you entered does not match the email associated with your account.');
-                    } else {
-                        $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
-                        $user->setPassword($hashedPassword);
-                        try {
-                            $mail = (new TemplatedEmail())
-                                ->from('support@luxury-services.com')
-                                ->to($user->getEmail())
-                                ->subject('Change of password')
-                                ->htmlTemplate('emails/change-password.html.twig');         
-            
-                            $mailer->send($mail);
-                            $this->addFlash('success', 'Your password has been changed successfully!');
-                        } catch (\Exception $e) {
-                            $this->addFlash('danger', 'An error occurred while sending the message : ' . $e->getMessage());
-                        }
-                    }
-                } else {
-                    $this->addFlash('danger', 'Email and password must be filled together to change password.');
-                }
+            if ($email && $newPassword) {
+                $passwordUpdater->updatePassword($user, $email, $newPassword);
+            } elseif ($email || $newPassword) {
+                $this->addFlash('danger', 'Email and password must be filled together to change password.');
             }
 
             $progressCalculator->calculerProgress($candidate);
@@ -112,24 +69,17 @@ final class ProfileController extends AbstractController
             return $this->redirectToRoute('app_profile');
         }
 
-        if ($candidate->getProfilPicture()) {
-            $originalProfilePictureFilename = preg_replace('/-\w{13}(?=\.\w{3,4}$)/', '', $candidate->getProfilPicture());
-        }
-
-        if ($candidate->getPassport()) {
-            $originalPassportFilename = preg_replace('/-\w{13}(?=\.\w{3,4}$)/', '', $candidate->getPassport());
-        }
-
-        if ($candidate->getCv()) {
-            $originalCvFilename = preg_replace('/-\w{13}(?=\.\w{3,4}$)/', '', $candidate->getCv());
-        }
-
         return $this->render('profile/index.html.twig', [
             'form' => $form->createView(),
             'candidate' => $candidate,
-            'originalProfilPicture' => $originalProfilePictureFilename ?? null,
-            'originalPassport' => $originalPassportFilename ?? null,
-            'originalCv' => $originalCvFilename ?? null,
+            'originalProfilPicture' => $this->getOriginalFilename($candidate->getProfilPicture()),
+            'originalPassport' => $this->getOriginalFilename($candidate->getPassport()),
+            'originalCv' => $this->getOriginalFilename($candidate->getCv()),
         ]);
+    }
+
+    private function getOriginalFilename(?string $filename): ?string
+    {
+        return $filename ? preg_replace('/-\w{13}(?=\.\w{3,4}$)/', '', $filename) : null;
     }
 }

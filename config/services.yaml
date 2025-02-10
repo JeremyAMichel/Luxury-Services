@@ -27,3 +27,7 @@ services:
     App\Services\FileUploader:
         arguments:
             $targetDirectory: '%upload_directory%'
+
+    App\Services\PasswordUpdater:
+        arguments:
+            $requestStack: '@request_stack'
