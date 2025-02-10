@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\CandidateType;
-use App\Services\FileHandler;
-use App\Services\PasswordUpdater;
-use App\Services\ProfileProgressCalculator;
+use App\Interfaces\FileHandlerInterface;
+use App\Interfaces\PasswordUpdaterInterface;
+use App\Interfaces\ProfileProgressCalculatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,9 +21,9 @@ final class ProfileController extends AbstractController
     public function index(
         Request $request,
         EntityManagerInterface $entityManager,
-        FileHandler $fileHandler,
-        PasswordUpdater $passwordUpdater,
-        ProfileProgressCalculator $progressCalculator
+        FileHandlerInterface $fileHandler,
+        PasswordUpdaterInterface $passwordUpdater,
+        ProfileProgressCalculatorInterface $progressCalculator
     ): Response {
       
         /** @var User */

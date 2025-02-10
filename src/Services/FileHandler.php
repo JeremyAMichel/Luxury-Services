@@ -3,9 +3,10 @@
 namespace App\Services;
 
 use App\Entity\Candidate;
+use App\Interfaces\FileHandlerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileHandler
+class FileHandler implements FileHandlerInterface
 {
     private FileUploader $fileUploader;
 

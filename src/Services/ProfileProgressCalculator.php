@@ -3,10 +3,11 @@ namespace App\Services;
 
 use App\Attribute\ProfileField;
 use App\Entity\Candidate;
+use App\Interfaces\ProfileProgressCalculatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use ReflectionClass;
 
-class ProfileProgressCalculator
+class ProfileProgressCalculator implements ProfileProgressCalculatorInterface
 {
     private static array $profileMappingCache = [];
     private EntityManagerInterface $entityManager;
