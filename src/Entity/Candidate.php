@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Attribute\ProfileField;
 use App\Repository\CandidateRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
@@ -16,10 +17,12 @@ class Candidate
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $firstName = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $lastName = null;
@@ -40,55 +43,71 @@ class Candidate
     #[Assert\NotNull]
     private ?User $user = null;
 
+    #[ProfileField()]
     #[ORM\ManyToOne(inversedBy: 'candidates')]
     private ?Gender $gender = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $currentLocation = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $address = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $country = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $nationality = null;
 
+    #[ProfileField()]
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $birthDate = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $birthPlace = null;
 
+    #[ProfileField()]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
 
+    #[ProfileField()]
     #[ORM\ManyToOne(inversedBy: 'candidates')]
     private ?Category $jobCategory = null;
 
+    #[ProfileField()]
     #[ORM\ManyToOne(inversedBy: 'candidates')]
     private ?Experience $experience = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $profilPicture = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $passport = null;
 
+    #[ProfileField()]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $cv = null;
+
+    #[ORM\Column(type: Types::INTEGER, options: ["default" => 0])]
+    private int $completionPercentage = 0;
 
     public function __construct(DateTimeImmutable $createdAt = new DateTimeImmutable(), DateTimeImmutable $updatedAt = new DateTimeImmutable())
     {
@@ -341,5 +360,15 @@ class Candidate
         return $this;
     }
 
-   
+    public function getCompletionPercentage(): int
+    {
+        return $this->completionPercentage;
+    }
+
+    public function setCompletionPercentage(int $completionPercentage): static
+    {
+        $this->completionPercentage = $completionPercentage;
+
+        return $this;
+    }
 }

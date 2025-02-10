@@ -79,13 +79,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="score-container">
-					<h4>
+					<h4 id="profile-completion" class="{% if candidate.completionPercentage != 100 %}hidden{% endif %}">
 						<img src="{{ asset('img/s9bPVaK.gif') }}" style="height: 80px; width: 201px;">
 						&nbsp;
-																														                            &nbsp; Hooray ! Your profile is complete.
+						Hooray ! Your profile is complete.
 					</h4>
-					<div class="c100 p100 small complete ">
-						<span>100%</span>
+					<div class="c100 p{{ candidate.completionPercentage }} small {% if candidate.completionPercentage < 50 %}red{% elseif candidate.completionPercentage < 100 %}orange{% else %}complete{% endif %}">
+						<span>{{ candidate.completionPercentage }}%</span>
 						<div class="slice">
 							<div class="bar"></div>
 							<div class="fill"></div>

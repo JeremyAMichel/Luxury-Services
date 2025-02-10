@@ -6,6 +6,7 @@ use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\CandidateType;
 use App\Services\FileUploader;
+use App\Services\ProfileProgressCalculator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,9 +26,10 @@ final class ProfileController extends AbstractController
         EntityManagerInterface $entityManager,
         FileUploader $fileUploader,
         UserPasswordHasherInterface $passwordHasher, 
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        ProfileProgressCalculator $progressCalculator
     ): Response {
-        // TODO : if user is not verified, display a proper template
+      
         /** @var User */
         $user = $this->getUser();
 
@@ -99,6 +101,8 @@ final class ProfileController extends AbstractController
                     $this->addFlash('danger', 'Email and password must be filled together to change password.');
                 }
             }
+
+            $progressCalculator->calculerProgress($candidate);
 
             $entityManager->persist($candidate);
             $entityManager->flush();
