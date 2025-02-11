@@ -6,7 +6,6 @@ use App\Entity\Category;
 use App\Entity\Experience;
 use App\Entity\Gender;
 use App\Entity\JobOfferType;
-use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
