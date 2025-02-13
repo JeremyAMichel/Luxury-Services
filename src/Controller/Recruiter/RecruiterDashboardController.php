@@ -46,7 +46,12 @@ class RecruiterDashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        // TODO custom icons
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+
+        // TODO
+        // yield MenuItem::linkToCrud('My info', 'fas fa-list', EntityClass::class);
+
+        
     }
 }
