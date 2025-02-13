@@ -78,6 +78,29 @@ final class ProfileController extends AbstractController
         ]);
     }
 
+    #[Route('/profile/delete/{id}', name: 'app_profile_delete')]
+    public function delete(
+        Candidate $candidate,
+        EntityManagerInterface $entityManager,
+    ): Response {
+        // verifie si la personne qui supprime est celle qui est connecté
+        /** @var User */
+        $user = $this->getUser();
+        if ($user->getCandidate() !== $candidate) {
+            $this->addFlash('danger', 'You are not allowed to delete this profile!, the admin will be informed of this action.');
+
+            return $this->redirectToRoute('app_profile');
+        }
+
+        $candidate->setDeletedAt(new \DateTimeImmutable());
+        $user->setRoles(['ROLE_DELETED']);
+        $entityManager->flush();
+
+        // $this->addFlash('success', 'Profile deleted successfully!');
+
+        return $this->redirectToRoute('app_logout');
+    }
+
     private function getOriginalFilename(?string $filename): ?string
     {
         return $filename ? preg_replace('/-\w{13}(?=\.\w{3,4}$)/', '', $filename) : null;

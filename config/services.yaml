@@ -38,3 +38,7 @@ services:
 
   App\Services\ProfileProgressCalculator:
     tags: ["app.profile_progress_calculator"]
+
+  App\EventListener\LoginListener:
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login }
