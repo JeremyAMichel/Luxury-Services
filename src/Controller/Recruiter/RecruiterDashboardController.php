@@ -2,6 +2,7 @@
 
 namespace App\Controller\Recruiter;
 
+use App\Entity\Client;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -47,11 +48,11 @@ class RecruiterDashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         // TODO custom icons
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-tachometer-alt');
 
         // TODO
-        // yield MenuItem::linkToCrud('My info', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('My info', 'fa fa-user-tie', Client::class);
 
-        
+
     }
 }
