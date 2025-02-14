@@ -50,8 +50,10 @@ class RecruiterDashboardController extends AbstractDashboardController
         // TODO custom icons
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-tachometer-alt');
 
+        yield MenuItem::section('Fill your profile', 'fa fa-user-tie');
+
         // TODO
-        yield MenuItem::linkToCrud('My info', 'fa fa-user-tie', Client::class);
+        yield MenuItem::linkToCrud('Here', 'fa fa-arrow-right', Client::class);
 
 
     }

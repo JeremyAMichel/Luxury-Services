@@ -37,7 +37,7 @@ class Client
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
 
-    #[ORM\OneToOne(inversedBy: 'client', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'client')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 

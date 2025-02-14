@@ -3,6 +3,7 @@
 namespace App\Controller\Recruiter;
 
 use App\Entity\Client;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -13,6 +14,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Bundle\SecurityBundle\Security;
 use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 
 class ClientCrudController extends AbstractCrudController
 {
@@ -65,5 +68,19 @@ class ClientCrudController extends AbstractCrudController
         $response->andWhere('entity.user = :user')->setParameter('user', $this->getUser());
 
         return $response;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        /** @var User */
+        $user = $this->security->getUser();
+        $existingClient = $user->getClient();
+
+        if ($existingClient) {
+            return $actions
+                ->disable(Action::NEW);
+        }
+
+        return $actions;
     }
 }
