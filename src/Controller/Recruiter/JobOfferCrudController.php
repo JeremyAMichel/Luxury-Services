@@ -18,13 +18,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class JobOfferCrudController extends AbstractCrudController
 {
 
-    public function __construct(private EntityRepository $entityRepository)
+    public function __construct(private EntityRepository $entityRepository, private SluggerInterface $slugger)
     {
-        $this->entityRepository = $entityRepository;
     }
 
     public static function getEntityFqcn(): string
@@ -60,6 +60,7 @@ class JobOfferCrudController extends AbstractCrudController
             AssociationField::new('category')->autocomplete(),
 
             TextField::new('reference')->hideOnForm(),
+            TextField::new('slug')->hideOnForm(),
             DateTimeField::new('createdAt')->hideOnForm(),
 
         ];
@@ -79,7 +80,32 @@ class JobOfferCrudController extends AbstractCrudController
         $reference = $this->generateUniqueReference($entityManager);
         $entityInstance->setReference($reference);
 
+        // Générer le slug si le titre est renseigné
+        if ($jobTitle = $entityInstance->getJobTitle()) {
+            $slug = $this->slugger
+                ->slug(strtolower($jobTitle))
+                ->toString();
+            $entityInstance->setSlug($slug);
+        }
+
         parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (!$entityInstance instanceof JobOffer) {
+            return;
+        }
+
+        // Générer le slug si le titre est renseigné
+        if ($jobTitle = $entityInstance->getJobTitle()) {
+            $slug = $this->slugger
+                ->slug(strtolower($jobTitle))
+                ->toString();
+            $entityInstance->setSlug($slug);
+        }
+
+        parent::updateEntity($entityManager, $entityInstance);
     }
 
     /**

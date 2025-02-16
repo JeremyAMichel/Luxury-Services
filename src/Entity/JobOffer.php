@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interfaces\SluggerInterface;
 use App\Repository\JobOfferRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: JobOfferRepository::class)]
-class JobOffer
+class JobOffer implements SluggerInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -58,6 +59,9 @@ class JobOffer
      */
     #[ORM\OneToMany(targetEntity: Application::class, mappedBy: 'jobOffer', orphanRemoval: true)]
     private Collection $applications;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
 
     public function __construct(DateTimeImmutable $createdAt = new DateTimeImmutable())
     {
@@ -228,6 +232,18 @@ class JobOffer
                 $application->setJobOffer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

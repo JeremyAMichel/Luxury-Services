@@ -16,6 +16,28 @@ class JobOfferRepository extends ServiceEntityRepository
         parent::__construct($registry, JobOffer::class);
     }
 
+    public function findLatestActiveOffers(int $limit = 10): array
+    {
+        $qb = $this->createQueryBuilder('j')
+            ->select('NEW App\DTO\JobOfferHomeDTO(
+                j.jobTitle,
+                j.salary,
+                j.closingAt,
+                j.jobLocation,
+                j.reference,
+                j.description,
+                j.slug,
+                c.name
+            )')
+            ->leftJoin('j.category', 'c')
+            ->where('j.isActive = :active')
+            ->setParameter('active', true)
+            ->orderBy('j.createdAt', 'DESC')
+            ->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
     //    /**
     //     * @return JobOffer[] Returns an array of JobOffer objects
     //     */
