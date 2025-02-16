@@ -3,16 +3,24 @@
 namespace App\Controller\Recruiter;
 
 use App\Entity\Client;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AdminDashboard(routePath: '/pro', routeName: 'pro')]
 class RecruiterDashboardController extends AbstractDashboardController
 {
+
+    public function __construct(private AdminUrlGenerator $adminUrlGenerator)
+    {
+
+    }
+
     #[Route('/pro', name: 'pro')]
     public function index(): Response
     {
@@ -47,13 +55,28 @@ class RecruiterDashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        // TODO custom icons
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-tachometer-alt');
 
         yield MenuItem::section('Fill your profile', 'fa fa-user-tie');
+        
+        
 
-        // TODO
-        yield MenuItem::linkToCrud('Here', 'fa fa-arrow-right', Client::class);
+        /** @var User */
+        $user = $this->getUser();
+        $client = $user->getClient();
+
+
+        // Générer l'URL de la page d'édition du profil Client
+        $url = $this->adminUrlGenerator
+            ->setController(ClientCrudController::class)
+            ->setAction('edit')
+            ->setEntityId($client->getId())
+            ->generateUrl();
+
+        yield MenuItem::linkToUrl('Here', 'fa fa-arrow-right', $url);
+
+
+        yield MenuItem::section('Job Offer', 'fa fa-briefcase');
 
 
     }

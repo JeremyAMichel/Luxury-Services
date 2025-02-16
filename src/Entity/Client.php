@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Cascade;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client
@@ -37,7 +38,7 @@ class Client
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
 
-    #[ORM\OneToOne(inversedBy: 'client')]
+    #[ORM\OneToOne(inversedBy: 'client', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
