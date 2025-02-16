@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\JobOfferRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -51,9 +53,16 @@ class JobOffer
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client = null;
 
+    /**
+     * @var Collection<int, Application>
+     */
+    #[ORM\OneToMany(targetEntity: Application::class, mappedBy: 'jobOffer', orphanRemoval: true)]
+    private Collection $applications;
+
     public function __construct(DateTimeImmutable $createdAt = new DateTimeImmutable())
     {
         $this->createdAt = $createdAt;
+        $this->applications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -189,6 +198,36 @@ class JobOffer
     public function setClient(?Client $client): static
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Application>
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): static
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
+            $application->setJobOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): static
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getJobOffer() === $this) {
+                $application->setJobOffer(null);
+            }
+        }
 
         return $this;
     }

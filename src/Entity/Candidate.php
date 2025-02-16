@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Attribute\ProfileField;
 use App\Repository\CandidateRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -109,10 +111,17 @@ class Candidate
     #[ORM\Column(type: Types::INTEGER, options: ["default" => 0])]
     private int $completionPercentage = 0;
 
+    /**
+     * @var Collection<int, Application>
+     */
+    #[ORM\OneToMany(targetEntity: Application::class, mappedBy: 'candidate', orphanRemoval: true)]
+    private Collection $applications;
+
     public function __construct(DateTimeImmutable $createdAt = new DateTimeImmutable(), DateTimeImmutable $updatedAt = new DateTimeImmutable())
     {
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->applications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -368,6 +377,36 @@ class Candidate
     public function setCompletionPercentage(int $completionPercentage): static
     {
         $this->completionPercentage = $completionPercentage;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Application>
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): static
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
+            $application->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): static
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getCandidate() === $this) {
+                $application->setCandidate(null);
+            }
+        }
 
         return $this;
     }

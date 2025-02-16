@@ -2,7 +2,9 @@
 
 namespace App\Controller\Recruiter;
 
+use App\Entity\Application;
 use App\Entity\Client;
+use App\Entity\JobOffer;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -50,7 +52,8 @@ class RecruiterDashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Luxury Services');
+            ->setTitle('Luxury Services')
+            ->setFaviconPath('img/luxury-services-logo.png');
     }
 
     public function configureMenuItems(): iterable
@@ -77,6 +80,10 @@ class RecruiterDashboardController extends AbstractDashboardController
 
 
         yield MenuItem::section('Job Offer', 'fa fa-briefcase');
+        yield MenuItem::linkToCrud('Manage your jobs', 'fa fa-tasks', JobOffer::class);
+        // TODO
+        // yield MenuItem::linkToCrud('Applications', 'fa fa-user-check', Application::class);
+
 
 
     }

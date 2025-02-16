@@ -19,7 +19,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 
 class ClientCrudController extends AbstractCrudController
 {
-    // TODO finir de filtrer pour UN client
     private Security $security;
     private EntityRepository $entityRepository;
 
