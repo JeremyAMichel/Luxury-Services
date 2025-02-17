@@ -2896,3 +2896,17 @@ Contact Map
     height: 500px;
 }
 
+/* ----------------------------------------------------------------
+Portfolio
+-----------------------------------------------------------------*/
+
+.portfolio {
+    transition: opacity 0.1s ease-in-out;
+}
+
+.portfolio-filter li a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    padding: 5px 15px;
+}

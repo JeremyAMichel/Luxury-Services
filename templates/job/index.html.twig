@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+	{{ parent() }}
+    <script src="{{ asset('scripts/jobFilterLinks.js') }}"></script>	
+{% endblock %}
+
 
 {% block body %}
 
@@ -27,14 +32,20 @@
                 <div class="portfolio-container">
 
                     <ul class="portfolio-filter brand-filter text-center">
-                        <li class="active waves-effect waves-light" data-group="all">All</li>
+                        <li class="{{ currentCategory == 'all' ? 'active' : '' }} waves-effect waves-light">
+                            <a href="{{ path('app_job', {'category': 'all'}) }}">All</a>
+                        </li>
                         {% for category in categories %}
-                            <li class=" waves-effect waves-light" data-group="{{ category.name|lower }}">{{ category.name }}</li>
+                            <li class="{{ currentCategory == category.name|lower ? 'active' : '' }} waves-effect waves-light">
+                                <a href="{{ path('app_job', {'category': category.name|lower}) }}">
+                                    {{ category.name }}
+                                </a>
+                            </li>
                         {% endfor %}
                     </ul>
                     <div class="portfolio portfolio-with-title col-2 gutter mt-30">                 
                         {% for job in jobOffers %}
-                            <div class="portfolio-item" data-groups='["all", "{{ job.category|lower }}"]'>
+                            <div class="portfolio-item" >
                                 <div class="portfolio-wrapper">
                                     <div class="card job-card">
                                         <div class="card-content">
@@ -65,6 +76,10 @@
                         {% endfor %}
 
                         <div class="no-item"></div>
+                    </div>
+                    {# Ajout de la pagination #}
+                    <div class="text-center mt-40">
+                        {{ knp_pagination_render(jobOffers, 'pagination/custom_pagination.html.twig') }}
                     </div>
                 </div>
             </div>
