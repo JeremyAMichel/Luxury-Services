@@ -23,9 +23,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class JobOfferCrudController extends AbstractCrudController
 {
 
-    public function __construct(private EntityRepository $entityRepository, private SluggerInterface $slugger)
-    {
-    }
+    public function __construct(private EntityRepository $entityRepository, private SluggerInterface $slugger) {}
 
     public static function getEntityFqcn(): string
     {
@@ -82,9 +80,7 @@ class JobOfferCrudController extends AbstractCrudController
 
         // Générer le slug si le titre est renseigné
         if ($jobTitle = $entityInstance->getJobTitle()) {
-            $slug = $this->slugger
-                ->slug(strtolower($jobTitle))
-                ->toString();
+            $slug = $this->generateUniqueSlug($entityManager, $jobTitle);
             $entityInstance->setSlug($slug);
         }
 
@@ -99,9 +95,7 @@ class JobOfferCrudController extends AbstractCrudController
 
         // Générer le slug si le titre est renseigné
         if ($jobTitle = $entityInstance->getJobTitle()) {
-            $slug = $this->slugger
-                ->slug(strtolower($jobTitle))
-                ->toString();
+            $slug = $this->generateUniqueSlug($entityManager, $jobTitle);
             $entityInstance->setSlug($slug);
         }
 
@@ -128,5 +122,25 @@ class JobOfferCrudController extends AbstractCrudController
         } while ($exists);
 
         return $reference;
+    }
+
+    /**
+     * Génère un slug unique pour une offre d'emploi
+     * @param string $title Titre de l'offre d'emploi
+     */
+    private function generateUniqueSlug(EntityManagerInterface $entityManager, string $title): string
+    {
+        $baseSlug = $this->slugger->slug(strtolower($title));
+        $slug = $baseSlug;
+        // $counter = 1;
+
+        // Vérifier si le slug existe déjà
+        while ($entityManager->getRepository(JobOffer::class)->findOneBy(['slug' => $slug->toString()])) {
+            // Ajouter un suffixe unique basé sur timestamp court
+            $uniqueSuffix = substr(uniqid(), -4);
+            $slug = $this->slugger->slug($baseSlug . '-' . $uniqueSuffix);
+        }
+
+        return $slug->toString();
     }
 }
